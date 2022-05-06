@@ -13,12 +13,12 @@
       Nos Derniers Articles
     </v-card-title>
 
-    <v-row class="justify-space-around ma-5">
-      <AllArticles />
-      <AllArticles />
-      <AllArticles />
-      <AllArticles />
-      <AllArticles />
+    <v-row
+      v-for="article in $store.state.articles.articles"
+      :key="article.id"
+      class="justify-space-around ma-5"
+    >
+      <Articles :article="article" />
     </v-row>
   </div>
 </template>
@@ -58,6 +58,14 @@ export default {
         },
       ],
     }
+  },
+  created() {
+    this.getArticles()
+  },
+  methods: {
+    async getArticles() {
+      await this.$store.dispatch('articles/setArticles')
+    },
   },
 }
 </script>
