@@ -10,9 +10,10 @@
             src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
           ></v-img>
         </v-list-item-avatar>
-
         <v-list-item-content>
-          <v-list-item-title>Evan You</v-list-item-title>
+          <v-list-item-title>
+            {{ article.user.firstName }} {{ article.user.lastName }}
+          </v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-card-actions>
@@ -35,3 +36,14 @@
     </v-card-text>
   </v-card>
 </template>
+
+<script>
+export default {
+  props: {
+    article: {
+      type: Object,
+      required: true,
+    },
+  },
+}
+</script>
