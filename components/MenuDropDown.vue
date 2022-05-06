@@ -1,12 +1,12 @@
 <template>
-  <div class="text-center">
-    <v-menu offset-y>
+  <div class="text-center" >
+    <v-menu offset-y >
       <template #activator="{ on, attrs }">
-        <v-btn text v-bind="attrs" v-on="on">
+        <v-btn text v-bind="attrs" v-on="on" style="color: white">
           {{ $props.items.title }}
         </v-btn>
       </template>
-      <v-list>
+      <v-list >
         <v-list-item v-for="(item, index) in items.articles" :key="index">
           <v-list-item-title>{{ item.title }}</v-list-item-title>
         </v-list-item>
