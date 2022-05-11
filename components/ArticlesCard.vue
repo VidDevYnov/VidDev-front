@@ -7,7 +7,7 @@
           <v-img
             class="elevation-6"
             alt=""
-            src="https://avataaars.io/?avatarStyle=Transparent&topType=ShortHairShortCurly&accessoriesType=Prescription02&hairColor=Black&facialHairType=Blank&clotheType=Hoodie&clotheColor=White&eyeType=Default&eyebrowType=DefaultNatural&mouthType=Default&skinColor=Light"
+            :src="article.user.profilPicture"
           ></v-img>
         </v-list-item-avatar>
         <v-list-item-content>
@@ -21,19 +21,15 @@
     <v-img
       height="200"
       width="250"
-      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+     :src="article.images[0].path"
     ></v-img>
+ 
+   <div  class="ma-2">Prix: {{ article.price }},00€</div>
+    
+  <div class="ma-2">Taille: {{ article.articleSize.worded }}</div>
+  
+  <div class="ma-2">Marque: {{ article.brand }}</div>
 
-    <v-card-title>Cafe Badilico</v-card-title>
-
-    <v-card-text>
-      <div class="my-4 text-subtitle-1">Italian, Cafe</div>
-
-      <div>
-        Small plates, salads sandwiches - an intimate setting with 12 indoor
-        seats plus patio seating.
-      </div>
-    </v-card-text>
   </v-card>
 </template>
 
