@@ -1,5 +1,5 @@
 <template>
-  <v-app style="background-color: #1e1e1e">
+  <v-app dark>
     <MenuNavBar />
     <v-main>
       <v-container fluid class="pa-0" style="height: 100%">

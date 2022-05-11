@@ -1,6 +1,6 @@
 
 <template>
-  <v-card class="ma-5" max-width="250">
+  <v-card class="ma-5" max-width="250" color="light" light>
     <v-card-actions>
       <v-list-item class="grow">
         <v-list-item-avatar color="grey darken-3">
