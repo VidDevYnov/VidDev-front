@@ -24,15 +24,21 @@
           ></v-text-field>
           <v-text-field
             v-model="register.password"
+            :append-icon="isPassDisabled ? 'mdi-eye' : 'mdi-eye-off'"
+            :rules="passwordRules"
+            :type="isPassDisabled ? 'text' : 'password'"
             label="Mot de passe"
             outlined
-            :rules="passwordRules"
+            @click:append="isPassDisabled = !isPassDisabled"
           ></v-text-field>
           <v-text-field
             v-model="confirmPassword"
+            :append-icon="isConfirmPassDisabled ? 'mdi-eye' : 'mdi-eye-off'"
+            :rules="passwordConfirmationRules"
+            :type="isConfirmPassDisabled ? 'text' : 'password'"
             label="Confirmation du mot de passe"
             outlined
-            :rules="passwordConfirmationRules"
+            @click:append="isConfirmPassDisabled = !isConfirmPassDisabled"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -55,6 +61,8 @@ export default {
   data() {
     return {
       isFormValid: false,
+      isPassDisabled: false,
+      isConfirmPassDisabled: false,
       register: {
         lastName: '',
         firstName: '',

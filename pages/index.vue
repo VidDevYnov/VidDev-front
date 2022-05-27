@@ -10,18 +10,15 @@
     </div>
 
     <v-card-title class="logo py-4 d-flex justify-center" style="color: white">
-     <h2 style> Nos derniers articles </h2>
+      <h2 style>Nos derniers articles</h2>
     </v-card-title>
 
-    <v-row
-      v-for="article in $store.state.articles.articles"
-      :key="article.id"
-      class="justify-space-around ma-5"
-    >
-      <ArticlesCard :article="article" />
-      <ArticlesCard :article="article" />
-      <ArticlesCard :article="article" />
-      <ArticlesCard :article="article" />
+    <v-row class="justify-space-around ma-5">
+      <ArticlesCard
+        v-for="article in $store.state.articles.articles"
+        :key="article.id"
+        :article="article"
+      />
     </v-row>
   </div>
 </template>

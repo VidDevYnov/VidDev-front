@@ -44,18 +44,7 @@
           <v-row class="justify-start">
             <div class="d-flex pa-2">
               <p class="pr-1">Adresse :</p>
-              <p>
-                {{
-                  $store.state.user.profil.addresses[0].address +
-                    '  ' +
-                    $store.state.user.profil.addresses[0].postalCode +
-                    '  ' +
-                    $store.state.user.profil.addresses[0].city +
-                    '  ' +
-                    $store.state.user.profil.addresses[0].country ||
-                  "Pas d'adresse"
-                }}
-              </p>
+              <p v-if="address">{{ address }}</p>
             </div>
           </v-row>
         </v-col>
@@ -79,12 +68,12 @@
         </v-card>
       </v-col>
       <v-col
+        v-for="(article, index) in $store.state.user.profil.articles"
+        :key="index"
         cols="7"
         sm="4"
         md="3"
         lg="2"
-        v-for="(article, index) in $store.state.user.profil.articles"
-        :key="index"
       >
         <v-card
           color="light"
@@ -102,6 +91,23 @@
 export default {
   data() {
     return {}
+  },
+
+  computed: {
+    address() {
+      if (this.$store.state.user.profil.addresses?.length > 0) {
+        return (
+          this.$store.state.user.profil.addresses[0].address +
+          '  ' +
+          this.$store.state.user.profil.addresses[0].postalCode +
+          '  ' +
+          this.$store.state.user.profil.addresses[0].city +
+          '  ' +
+          this.$store.state.user.profil.addresses[0].country
+        )
+      }
+      return "Pas d'adresse"
+    },
   },
 
   created() {

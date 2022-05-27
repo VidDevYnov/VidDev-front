@@ -13,9 +13,12 @@
           </v-text-field>
           <v-text-field
             v-model="login.password"
+            :append-icon="isPassDisabled ? 'mdi-eye' : 'mdi-eye-off'"
+            :rules="passwordRules"
+            :type="isPassDisabled ? 'text' : 'password'"
             label="Mot de passe"
             outlined
-            :rules="passwordRules"
+            @click:append="isPassDisabled = !isPassDisabled"
           ></v-text-field>
         </v-col>
       </div>
@@ -25,9 +28,6 @@
         Connexion</v-btn
       >
     </div>
-    <div class="d-flex justify-center ma-5">
-      <v-btn color="#417D7A" dark @click="refreshToken"> Connexion</v-btn>
-    </div>
   </div>
 </template>
 <script>
@@ -35,6 +35,7 @@ export default {
   data() {
     return {
       isFormValid: false,
+      isPassDisabled: false,
       login: {
         username: '',
         password: '',
@@ -55,9 +56,6 @@ export default {
   methods: {
     async userLogin() {
       await this.$store.dispatch('login/connection', { user: this.login })
-    },
-    async refreshToken() {
-      await this.$store.dispatch('login/refreshToken')
     },
   },
 }
