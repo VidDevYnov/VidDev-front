@@ -1,17 +1,65 @@
 <template>
   <div class="d-flex flex-column justify-center" style="height: 100%">
     <h2 class="text-center ma-5">Connexion</h2>
+    <v-form v-model="isFormValid">
+      <div class="d-flex justify-center ma-5">
+        <v-col cols="12" sm="10" md="6" lg="4"
+          ><v-text-field
+            v-model="login.username"
+            label="Email"
+            outlined
+            :rules="emailRules"
+          >
+          </v-text-field>
+          <v-text-field
+            v-model="login.password"
+            label="Mot de passe"
+            outlined
+            :rules="passwordRules"
+          ></v-text-field>
+        </v-col>
+      </div>
+    </v-form>
     <div class="d-flex justify-center ma-5">
-      <v-col cols="12" sm="10" md="6" lg="4"
-        ><v-text-field label="Email" outlined> </v-text-field>
-        <v-text-field label="Mot de passe" outlined></v-text-field>
-      </v-col>
+      <v-btn :disabled="!isFormValid" color="#417D7A" dark @click="userLogin">
+        Connexion</v-btn
+      >
     </div>
     <div class="d-flex justify-center ma-5">
-      <v-btn color="#417D7A" dark> Connexion </v-btn>
+      <v-btn color="#417D7A" dark @click="refreshToken"> Connexion</v-btn>
     </div>
   </div>
 </template>
 <script>
-export default {}
+export default {
+  data() {
+    return {
+      isFormValid: false,
+      login: {
+        username: '',
+        password: '',
+      },
+
+      passwordRules: [
+        (value) => !!value || 'Entrez un mot de passe',
+        (value) => (value && value.length >= 6) || 'Minimum 6 caractère',
+      ],
+
+      emailRules: [
+        (v) => !!v || 'Veuillez entrer votre email',
+        (v) => /.+@.+\..+/.test(v) || "Le mail n'est pas valide",
+      ],
+    }
+  },
+
+  methods: {
+    async userLogin() {
+      await this.$store.dispatch('login/connection', { user: this.login })
+    },
+    async refreshToken() {
+      await this.$store.dispatch('login/refreshToken')
+    },
+  },
+}
 </script>
+
