@@ -5,7 +5,6 @@ import VueCookies from 'vue-cookies'
 export const actions = {
     async connection({ commit }, { user }) {
         try {
-            console.log(user)
             const res = await axios.post(
                 'http://localhost:8000/api/login',
                 { ...user },
@@ -13,9 +12,10 @@ export const actions = {
             )
             VueCookies.set('refresh_token', res.data.refresh_token, { httpOnly: true });
             VueCookies.set('token', res.data.token, { httpOnly: true });
-
+            commit('notification/create', { description: 'Vous êtes connecté' }, { root: true })
+            this.$router.push('/user/profil')
         } catch (error) {
-            console.log(error)
+            commit('notification/create', { description: 'Problème lors de la connection', type: 'error' }, { root: true })
         }
     },
 
@@ -29,7 +29,6 @@ export const actions = {
             )
             VueCookies.set('refresh_token', res.data.refresh_token, { httpOnly: true });
             VueCookies.set('token', res.data.token, { httpOnly: true });
-            console.log(res.data)
 
         } catch (error) {
             console.log(error)
