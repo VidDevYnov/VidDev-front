@@ -9,10 +9,7 @@
       <v-img height="400" src="share.jpg"></v-img>
     </div>
 
-    <v-card-title class="logo py-4 d-flex justify-center" style="color: white">
-      <h2 style>Nos derniers articles</h2>
-    </v-card-title>
-
+    <Title name="Nos derniers articles " />
     <v-row class="justify-space-around ma-5">
       <ArticlesCard
         v-for="article in $store.state.articles.articles"
@@ -25,7 +22,6 @@
 
 <script>
 export default {
-  name: 'IndexPage',
   data() {
     return {
       items: [
