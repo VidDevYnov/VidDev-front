@@ -38,7 +38,7 @@
           </div>
         </v-row>
       </v-col>
-      <v-col class="d-flex flex-column" cols="8" sm="5" md="3">
+      <v-col class="d-flex flex-column" cols="9" sm="5" md="4" lg="3" xl="2">
         <v-btn class="ma-2" color="#417D7A">Modifier son profil </v-btn>
         <v-btn class="ma-2" color="#EF5350">Modifier son mot passe </v-btn>
         <v-btn class="ma-2" color="#66BB6A">Modifier son solde </v-btn>

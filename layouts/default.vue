@@ -1,8 +1,8 @@
 <template>
   <v-app dark>
-    <MenuNavBar />
-    <v-main>
-      <client-only>
+    <client-only>
+      <MenuNavBar />
+      <v-main>
         <v-container fluid class="pa-0" style="height: 100%">
           <Notification
             v-for="notification in $store.state.notification.list"
@@ -11,8 +11,8 @@
           />
           <router-view></router-view>
         </v-container>
-      </client-only>
-    </v-main>
-    <v-footer><span>Hello</span></v-footer>
+      </v-main>
+      <MenuFooter />
+    </client-only>
   </v-app>
 </template>
