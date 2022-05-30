@@ -56,6 +56,11 @@ export default {
   methods: {
     async userLogin() {
       await this.$store.dispatch('login/connection', { user: this.login })
+      setInterval(this.refreshToken, 3000000)
+    },
+
+    async refreshToken() {
+      await this.$store.dispatch('login/refreshToken')
     },
   },
 }

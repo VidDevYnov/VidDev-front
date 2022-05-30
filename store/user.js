@@ -26,22 +26,16 @@ export const actions = {
         }
     },
 
-    async setProfil({ commit, dispatch }) {
+    async setProfil({ commit }) {
         try {
-            await dispatch('login/refreshToken', {}, { root: true })
-
             const token = VueCookies.get('token')
-
             const config = {
                 headers: { Authorization: `Bearer ${token}` }
             };
-
             const profil = await axios.get('http://localhost:8000/api/profil',
                 config
             )
-
             commit('set', { stateName: 'profil', user: { ...profil.data } })
-
         } catch (error) {
             commit('notification/create', { description: 'Problème lors de la récupération de votre profil', type: 'error' }, { root: true })
         }

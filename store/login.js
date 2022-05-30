@@ -29,8 +29,11 @@ export const actions = {
             )
             VueCookies.set('refresh_token', res.data.refresh_token, { httpOnly: true });
             VueCookies.set('token', res.data.token, { httpOnly: true });
+            console.log('Cron ok')
+
 
         } catch (error) {
+            console.log('Cron Nok')
             console.log(error)
         }
     },

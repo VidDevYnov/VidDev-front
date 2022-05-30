@@ -6,7 +6,7 @@
     ></v-row>
 
     <div>
-      <v-img height="400" src="share.jpg"></v-img>
+      <v-img height="400" src="image/share.jpg"></v-img>
     </div>
 
     <Title name="Nos derniers articles " />
