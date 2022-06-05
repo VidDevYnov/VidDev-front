@@ -14,27 +14,27 @@
         <v-row class="justify-start">
           <div class="d-flex pa-2">
             <p class="pr-1">Prénom :</p>
-            <p class="pr-10">{{ $store.state.user.profil.firstName }}</p>
+            <p class="pr-10">{{ $props.profil.firstName }}</p>
           </div>
           <div class="d-flex pa-2">
             <p class="pr-1">Nom :</p>
-            <p class="pr-10">{{ $store.state.user.profil.lastName }}</p>
+            <p class="pr-10">{{ $props.profil.lastName }}</p>
           </div>
           <div class="d-flex pa-2">
             <p class="pr-1">Email :</p>
-            <p class="pr-10">{{ $store.state.user.profil.email }}</p>
+            <p class="pr-10">{{ $props.profil.email }}</p>
           </div>
         </v-row>
         <v-row class="justify-start">
           <div class="d-flex pa-2">
             <p class="pr-1">Bio :</p>
-            <p>{{ $store.state.user.profil.bio || 'Pas de bio' }}</p>
+            <p>{{ $props.profil.bio || 'Pas de bio' }}</p>
           </div>
         </v-row>
         <v-row class="justify-start">
           <div class="d-flex pa-2">
             <p class="pr-1">Adresse :</p>
-            <p v-if="address">{{ address }}</p>
+            <p>{{ $props.profil.address }}</p>
           </div>
         </v-row>
       </v-col>
@@ -49,20 +49,10 @@
 
 <script>
 export default {
-  computed: {
-    address() {
-      if (this.$store.state.user.profil.addresses?.length > 0) {
-        return (
-          this.$store.state.user.profil.addresses[0].address +
-          '  ' +
-          this.$store.state.user.profil.addresses[0].postalCode +
-          '  ' +
-          this.$store.state.user.profil.addresses[0].city +
-          '  ' +
-          this.$store.state.user.profil.addresses[0].country
-        )
-      }
-      return "Pas d'adresse"
+  props: {
+    profil: {
+      type: Object,
+      required: true,
     },
   },
 }
