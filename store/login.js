@@ -1,5 +1,4 @@
 import axios from 'axios';
-import VueCookies from 'vue-cookies'
 
 
 export const actions = {
@@ -10,8 +9,10 @@ export const actions = {
                 { ...user },
                 { 'Content-Type': 'application/json' }
             )
-            VueCookies.set('refresh_token', res.data.refresh_token, { httpOnly: true });
-            VueCookies.set('token', res.data.token, { httpOnly: true });
+
+            localStorage.setItem('refresh_token', res.data.refresh_token)
+            localStorage.setItem('token', res.data.token)
+
             commit('notification/create', { description: 'Vous êtes connecté' }, { root: true })
             this.$router.push('/user/profil')
         } catch (error) {
@@ -24,13 +25,12 @@ export const actions = {
         try {
             const res = await axios.post(
                 'http://localhost:8000/api/token/refresh',
-                { "refresh_token": VueCookies.get('refresh_token') },
+                { "refresh_token": localStorage.getItem('refresh_token') },
                 { 'Content-Type': 'application/json' }
             )
-            VueCookies.set('refresh_token', res.data.refresh_token, { httpOnly: true });
-            VueCookies.set('token', res.data.token, { httpOnly: true });
-            console.log('Cron ok')
 
+            localStorage.setItem('refresh_token', res.data.refresh_token)
+            localStorage.setItem('token', res.data.token)
 
         } catch (error) {
             console.log('Cron Nok')
