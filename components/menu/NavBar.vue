@@ -54,7 +54,6 @@
 
 
 <script>
-import VueCookies from 'vue-cookies'
 
 export default {
   data() {
@@ -64,7 +63,7 @@ export default {
   },
   computed: {
     listButton() {
-      if (VueCookies.isKey('token')) {
+      if (localStorage.getItem('token')) {
         return [
           {
             name: 'Profil',
@@ -72,7 +71,7 @@ export default {
           },
           {
             name: 'Déconnexion',
-            path: '/user/profil',
+            path: '/auth/logout',
           },
         ]
       }

@@ -1,6 +1,4 @@
 import axios from 'axios';
-import VueCookies from 'vue-cookies'
-
 
 export const state = () => ({
     profil: [],
@@ -28,7 +26,8 @@ export const actions = {
 
     async setProfil({ commit }) {
         try {
-            const token = VueCookies.get('token')
+            const token = localStorage.getItem('token')
+
             const config = {
                 headers: { Authorization: `Bearer ${token}` }
             };
