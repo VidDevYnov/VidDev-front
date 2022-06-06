@@ -1,7 +1,7 @@
 <template>
   <div>
     <Title name="Détails de l'article" />
-    <v-row class="d-flex ma-0 pa-0 justify-space-around align-center">
+    <v-row class="d-flex ma-0 pa-0 justify-space-around">
       <v-col
         cols="12"
         sm="8"
@@ -30,8 +30,8 @@
       <v-col cols="10" sm="6" md="4" lg="3">
         <ArticlesInfo :article="article" />
       </v-col>
-      <v-col cols="10" sm="6" md="12" lg="12" class="ma-0">
-        <v-col cols="12" md="5" lg="5" class="ma-0 pa-0 pr-4">
+      <v-col cols="10" sm="6" md="12" lg="12" class="ma-0 pa-2">
+        <v-col cols="12" md="5" lg="5" class="ma-0 pa-0">
           <v-card class="pa-4 ma-1">
             <p class="ml-2">Description:</p>
             <p class="ml-4">{{ article.description }}</p>
