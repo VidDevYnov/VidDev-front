@@ -1,69 +1,47 @@
 <template>
-  <v-card class="pa-5 justify-center" width="300">
-    <p class="ml-2">
-      Nom de l'article: {{ $store.state.articles.article.name }}
-    </p>
-    <p class="ml-2">Prix: {{ $store.state.articles.article.price }},00€</p>
+  <v-card class="pa-4 ma-1 d-flex flex-column justify-space-around">
+    <p class="ml-2">Nom de l'article: {{ $props.article.name }}</p>
+    <p class="ml-2">Prix: {{ $props.article.price }},00€</p>
     <p class="ml-2">
       Taille:
-      {{ size }}
+      {{ getWorded($props.article.size) }}
     </p>
-    <p class="ml-2">Catégorie: {{ category }}</p>
-    <p class="ml-2">Matière: {{ material }}</p>
-    <p class="ml-2">Marque: {{ $store.state.articles.article.brand }}</p>
-    <p class="ml-2">Etat: {{ state }}</p>
-    <p class="ml-2">Couleur: {{ $store.state.articles.article.color }}</p>
-    
-      <v-btn color="#417D7A" style="color: white" width="220" class="ma-1 ml-5"> FAVORIS</v-btn>
-      
-      <v-btn color="#417D7A" style="color: white" width="220" class="ma-1 ml-5"> ACHETER</v-btn>
-    
+    <p class="ml-2">
+      Catégorie: {{ getWorded($props.article.articleCategory) }}
+    </p>
+    <p class="ml-2">Matière: {{ getWorded($props.article.articleMaterial) }}</p>
+    <p class="ml-2">Marque: {{ $props.article.brand }}</p>
+    <p class="ml-2">Etat: {{ getWorded($props.article.articleState) }}</p>
+    <p class="ml-2">Couleur: {{ $props.article.color }}</p>
+
+    <div class="d-flex flex-column align-center">
+      <v-btn color="#417D7A" style="color: white" width="220" class="ma-2">
+        FAVORIS</v-btn
+      >
+
+      <v-btn color="#417D7A" style="color: white" width="220" class="ma-2">
+        ACHETER</v-btn
+      >
+    </div>
   </v-card>
 </template>
 
 <script>
 export default {
+  props: {
+    article: {
+      type: Object,
+      required: true,
+    },
+  },
   computed: {
-    size() {
-      if (
-        typeof this.$store.state.articles.article.articleSize !== 'undefined'
-      ) {
-        console.log(typeof this.$store.state.articles.article.articleSize)
-        return this.$store.state.articles.article.articleSize.worded
+    getWorded() {
+      return (type) => {
+        if (typeof type !== 'undefined') {
+          return type.worded
+        }
+        return type
       }
-      return 'Pas de taille'
-    },
-
-    category() {
-      if (
-        typeof this.$store.state.articles.article.articleCategory !==
-        'undefined'
-      ) {
-        console.log(typeof this.$store.state.articles.article.articleCategory)
-        return this.$store.state.articles.article.articleCategory.worded
-      }
-      return 'Pas de categorie'
-    },
-
-    material() {
-      if (
-        typeof this.$store.state.articles.article.articleMaterial !==
-        'undefined'
-      ) {
-        console.log(typeof this.$store.state.articles.article.articleMaterial)
-        return this.$store.state.articles.article.articleMaterial.worded
-      }
-      return 'Pas de material'
-    },
-
-    state() {
-      if (
-        typeof this.$store.state.articles.article.articleState !== 'undefined'
-      ) {
-        console.log(typeof this.$store.state.articles.article.articleState)
-        return this.$store.state.articles.article.articleState.worded
-      }
-      return "Pas d'état"
     },
   },
 }
