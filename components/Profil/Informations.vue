@@ -4,10 +4,11 @@
       <v-col class="d-flex justify-center" cols="12" sm="6" md="4">
         <v-img
           contain
-          lazy-src="https://picsum.photos/id/11/10/6"
-          max-height="400"
-          src="https://picsum.photos/id/11/500/300"
-          style="clip-path: circle(25% at 50% 50%)"
+          max-height="200"
+          :src="
+            `http://localhost:8000/images/users/${$props.profil.imageFilePath}` ||
+            '../image/avatar.png'
+          "
         ></v-img>
       </v-col>
       <v-col cols="12" sm="6" md="4">
@@ -34,14 +35,18 @@
         <v-row class="justify-start">
           <div class="d-flex pa-2">
             <p class="pr-1">Adresse :</p>
-            <p>{{ $props.profil.address }}</p>
+            <p>
+              {{ $props.profil.address }}
+            </p>
           </div>
         </v-row>
       </v-col>
-      <v-col class="d-flex flex-column" cols="9" sm="5" md="4" lg="3" xl="2">
-        <v-btn class="ma-2" color="#417D7A">Modifier son profil </v-btn>
-        <v-btn class="ma-2" color="#EF5350">Modifier son mot passe </v-btn>
-        <v-btn class="ma-2" color="#66BB6A">Modifier son solde </v-btn>
+      <v-col cols="9" sm="5" md="4" lg="3" xl="2">
+        <NuxtLink to="modify" class="text-decoration-none">
+          <v-btn class="ma-2" outlined>
+            <v-icon class="mr-2">mdi-pencil</v-icon> Modifier son profil</v-btn
+          >
+        </NuxtLink>
       </v-col>
     </v-row>
   </div>

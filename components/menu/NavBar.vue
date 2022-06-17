@@ -70,6 +70,10 @@ export default {
             path: '/user/profil',
           },
           {
+            name: 'Paramètre du compte',
+            path: '/user/account',
+          },
+          {
             name: 'Déconnexion',
             path: '/auth/logout',
           },
