@@ -21,25 +21,28 @@
 </template>
 <script>
 export default {
-  created() {
-    this.getProfil()
-  },
   computed: {
     profil() {
       const profil = this.$store.state.user.profil
       if (profil.length !== 0) {
-        profil.address =
-          profil.addresses[0].address +
-          '  ' +
-          profil.addresses[0].postalCode +
-          '  ' +
-          profil.addresses[0].city +
-          '  ' +
-          profil.addresses[0].country
+        profil.address = "Pas d'adresse"
+        if (profil.addresses.length > 0) {
+          profil.address =
+            profil.addresses[0].address +
+            '  ' +
+            profil.addresses[0].postalCode +
+            '  ' +
+            profil.addresses[0].city +
+            '  ' +
+            profil.addresses[0].country
+        }
         return profil
       }
       return {}
     },
+  },
+  created() {
+    this.getProfil()
   },
   methods: {
     async getProfil() {

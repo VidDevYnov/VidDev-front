@@ -1,6 +1,6 @@
 <template>
   <div>
     <Title name="Inscription" />
-    <FormRegister />
+    <AuthFormRegister />
   </div>
 </template>
