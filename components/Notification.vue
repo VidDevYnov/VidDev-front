@@ -1,13 +1,22 @@
 <template>
   <div class="text-center">
-    <v-snackbar v-model="open" class="mb-8" :timeout="3000" :color="type.color">
+    <v-snackbar
+      v-model="open"
+      class="mb-8"
+      :timeout="3000"
+      :color="type.color"
+      outlined
+      dark
+    >
       <div class="d-flex">
         <v-icon class="mr-4">{{ `mdi-${type.icon}` }}</v-icon>
         <div class="d-flex align-center mt-1">
           {{ notification.description }}
         </div>
         <v-spacer></v-spacer>
-        <v-icon class="ml-2" @click="$store.commit('notification/delete', $props.id)"
+        <v-icon
+          class="ml-2"
+          @click="$store.commit('notification/delete', $props.id)"
           >mdi-close</v-icon
         >
       </div>

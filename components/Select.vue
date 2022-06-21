@@ -1,49 +1,48 @@
 <template>
-  <v-text-field
+  <v-select
     v-model="field"
+    :items="$props.items"
     :label="$props.label"
     outlined
     :rules="$props.rules"
-  ></v-text-field>
+  ></v-select>
 </template>
 
 <script>
-import { tryConvertStringToNumber } from '../services/numberHelper'
-
 export default {
   props: {
-    label: {
-      type: String,
-      required: true,
-    },
-    rules: {
-      type: Array,
-      required: false,
-      default: () => [],
-    },
     get: {
+      type: Object,
       required: true,
+      default: () => {},
     },
     fieldName: {
       type: Array,
       required: true,
     },
-    number: {
-      type: Boolean,
+    items: {
+      type: Array,
+      required: true,
+    },
+    label: {
+      type: String,
       required: false,
+      default: () => '',
     },
   },
   computed: {
     field: {
       get() {
-        return this.$props.get
+        if (this.$props.get) {
+          return { text: this.$props.get.worded, value: this.$props.get.id }
+        }
+        return ''
       },
       set(value) {
-        if (this.$props.number) value = tryConvertStringToNumber(value)
-
-        this.$store.commit(this.$props.fieldName[0] + '/setValue', {
+        this.$store.commit(`${this.$props.fieldName[0]}/setObjectId`, {
           stateName: this.$props.fieldName[1],
           fieldName: this.$props.fieldName[2],
+          id: 'id',
           value,
         })
       },

@@ -23,7 +23,7 @@
       </div>
     </v-form>
     <div class="d-flex justify-center ma-5">
-      <v-btn :disabled="!isFormValid" color="#417D7A" dark @click="userLogin">
+      <v-btn :disabled="!isFormValid" outlined @click="userLogin">
         Connexion</v-btn
       >
     </div>
