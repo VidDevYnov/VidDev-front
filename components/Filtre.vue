@@ -109,7 +109,6 @@ computed: {
           nameFilter.push({text: tab[index].worded,
           value:  tab[index].id })
         }
-        console.log(nameFilter)
         return nameFilter
       }
       return []

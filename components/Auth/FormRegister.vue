@@ -43,12 +43,7 @@
       </v-row>
     </v-form>
     <v-row class="justify-center ma-5">
-      <v-btn
-        :disabled="!isFormValid"
-        color="#417D7A"
-        style="color: white"
-        @click="create"
-      >
+      <v-btn :disabled="!isFormValid" outlined @click="create">
         Inscription</v-btn
       >
     </v-row>

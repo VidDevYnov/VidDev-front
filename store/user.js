@@ -1,4 +1,6 @@
 import axios from 'axios';
+import { config } from '../services/tokenHelper'
+
 
 export const state = () => ({
     profil: [],
@@ -34,13 +36,9 @@ export const actions = {
 
     async setProfil({ commit }) {
         try {
-            const token = localStorage.getItem('token')
 
-            const config = {
-                headers: { Authorization: `Bearer ${token}` }
-            };
             const profil = await axios.get('http://localhost:8000/api/profil',
-                config
+                config()
             )
             commit('set', { stateName: 'profil', user: { ...profil.data } })
         } catch (error) {
@@ -50,13 +48,10 @@ export const actions = {
 
     async modifyProfil({ commit }, { user, idUser }) {
         try {
-            const token = localStorage.getItem('token')
-            const config = {
-                headers: { Authorization: `Bearer ${token}` }
-            };
+
             await axios.put(`http://localhost:8000/api/users/${idUser}`,
                 user,
-                config
+                config()
             )
             commit('notification/create', { description: 'Le profil à bien été mis en à jour' }, { root: true })
         } catch (error) {
@@ -67,14 +62,9 @@ export const actions = {
 
     async modifyAddress({ commit }, { address, idAddress }) {
         try {
-            const token = localStorage.getItem('token')
-
-            const config = {
-                headers: { Authorization: `Bearer ${token}` }
-            };
             await axios.put(`http://localhost:8000/api/addresses/${idAddress}`,
                 address,
-                config
+                config()
             )
             commit('notification/create', { description: 'L\'adresse à bien été mis à jour' }, { root: true })
         } catch (error) {
@@ -85,13 +75,8 @@ export const actions = {
 
     async deleteAddress({ commit }, { idAddress }) {
         try {
-            const token = localStorage.getItem('token')
-
-            const config = {
-                headers: { Authorization: `Bearer ${token}` }
-            };
             await axios.delete(`http://localhost:8000/api/addresses/${idAddress}`,
-                config
+                config()
             )
             commit('notification/create', { description: 'L\'adresse à bien été supprimé' }, { root: true })
         } catch (error) {
@@ -102,16 +87,11 @@ export const actions = {
 
     async addAddress({ commit }, { user, address }) {
         try {
-            const token = localStorage.getItem('token')
-
-            const config = {
-                headers: { Authorization: `Bearer ${token}` }
-            };
             await axios.post(`http://localhost:8000/api/addresses`,
                 { ...address, user },
-                config
+                config()
             )
-            commit('notification/create', { description: 'L\'adresse à bien été ajouté' }, { root: true })
+            await commit('notification/create', { description: 'L\'adresse à bien été ajouté' }, { root: true })
         } catch (error) {
             commit('notification/create', { description: 'Problème lors de l\'ajout de l\'address', type: 'error' }, { root: true })
         }
@@ -120,7 +100,8 @@ export const actions = {
 
     async addProfilImage({ commit }, { idUser, formData }) {
         try {
-            await axios.post(`http://localhost:8000/api/users/${idUser}/image`, formData)
+            await axios.post(`http://localhost:8000/api/imageUser/${idUser}`, formData, config()
+            )
             commit('notification/create', { description: 'L\'image à bien été ajouté' }, { root: true })
 
         } catch (error) {

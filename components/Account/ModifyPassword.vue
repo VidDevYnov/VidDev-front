@@ -24,8 +24,7 @@
       <v-row class="justify-center ma-5">
         <v-btn
           :disabled="!isFormValid"
-          color="#417D7A"
-          style="color: white"
+          outlined
           @click="modifyPassword"
         >
           Enregistrer</v-btn
