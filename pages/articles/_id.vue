@@ -6,32 +6,19 @@
         cols="12"
         sm="8"
         md="5"
-        lg="5"
+        lg="4"
         class="d-flex justify-center align-center"
       >
-        <ArticlesImageP :path="getImagePrincPath(article.images)" />
-      </v-col>
-
-      <v-col
-        v-if="getImageSecPath(article.images) != ''"
-        cols="12"
-        sm="4"
-        md="3"
-        lg="4"
-        class="d-flex img"
-      >
-        <ArticlesImages
-          v-for="(image, index) in getImageSecPath(article.images)"
-          :key="index"
-          :path="image.path"
+        <ArticlesImage
+          :path="`http://localhost:8000/images/articles/${article.imageFilePath}`"
         />
       </v-col>
 
       <v-col cols="10" sm="6" md="4" lg="3">
         <ArticlesInfo :article="article" />
       </v-col>
-      <v-col cols="10" sm="6" md="12" lg="12" class="ma-0 pa-2">
-        <v-col cols="12" md="5" lg="5" class="ma-0 pa-0">
+      <v-col cols="10" sm="6" md="12" lg="5" class="ma-0 pa-2">
+        <v-col cols="12" md="6" lg="12" class="ma-0 pa-0">
           <v-card class="pa-4 ma-1">
             <p class="ml-2">Description:</p>
             <p class="ml-4">{{ article.description }}</p>
@@ -51,27 +38,6 @@ export default {
         return article
       }
       return {}
-    },
-    getImagePrincPath() {
-      return (image) => {
-        if (typeof image !== 'undefined') {
-          return image[0].path
-        }
-        return ''
-      }
-    },
-    getImageSecPath() {
-      return (image) => {
-        if (typeof image !== 'undefined') {
-          const ListImage = []
-
-          for (let i = 1; i < image.length; i++) {
-            ListImage.push(image[i])
-          }
-          return ListImage
-        }
-        return ''
-      }
     },
   },
   created() {

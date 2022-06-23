@@ -98,12 +98,15 @@
         <v-file-input
           v-model="article.image"
           label="Choisir une image"
-          hide-details
           class="d-flex align-center my-4"
           accept="image/png, image/jpeg, image/bmp"
           prepend-icon="mdi-camera"
           outlined
           dense
+          :rules="[
+            (value) =>
+              !value || value.size < 2000000 || 'L\'image est obligatoire',
+          ]"
         ></v-file-input>
       </v-col>
     </v-row>
@@ -169,6 +172,7 @@ export default {
         idUser: this.$store.state.user.profil.id,
         formData,
       })
+      this.$router.push('/user/profil')
     },
   },
 }

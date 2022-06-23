@@ -4,7 +4,7 @@
     <p class="ml-2">Prix: {{ $props.article.price }},00€</p>
     <p class="ml-2">
       Taille:
-      {{ getWorded($props.article.size) }}
+      {{ getWorded($props.article.articleSize) }}
     </p>
     <p class="ml-2">
       Catégorie: {{ getWorded($props.article.articleCategory) }}
@@ -15,13 +15,9 @@
     <p class="ml-2">Couleur: {{ $props.article.color }}</p>
 
     <div class="d-flex flex-column align-center">
-      <v-btn color="#417D7A" style="color: white" width="220" class="ma-2">
-        FAVORIS</v-btn
-      >
+      <v-btn outlined width="220" class="ma-2"> FAVORIS</v-btn>
 
-      <v-btn color="#417D7A" style="color: white" width="220" class="ma-2">
-        ACHETER</v-btn
-      >
+      <v-btn outlined width="220" class="ma-2"> ACHETER</v-btn>
     </div>
   </v-card>
 </template>

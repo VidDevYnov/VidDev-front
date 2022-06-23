@@ -3,8 +3,6 @@
     ><v-card class="pa-5">
       <p
         class="red--text text--lighten-1"
-        color="
-"
       >
         Attention si vous changez votre mot de passe vous allez être déconnecté
       </p>

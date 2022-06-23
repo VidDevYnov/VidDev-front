@@ -2,14 +2,14 @@
   <div class="d-flex flex-column justify-center">
     <v-row align="center" class="ma-0 pa-5 justify-space-around">
       <v-col class="d-flex justify-center" cols="12" sm="6" md="4">
-        <v-img
-          contain
-          max-height="200"
-          :src="
-            `http://localhost:8000/images/users/${$props.profil.imageFilePath}` ||
-            '../image/avatar.png'
-          "
-        ></v-img>
+        <v-avatar color="primary" size="200">
+          <v-img
+            :src="
+              `http://localhost:8000/images/users/${$props.profil.imageFilePath}` ||
+              '../image/avatar.png'
+            "
+          ></v-img>
+        </v-avatar>
       </v-col>
       <v-col cols="12" sm="6" md="4">
         <v-row class="justify-start">

@@ -35,7 +35,7 @@ export const actions = {
             const articles = await axios.get('http://localhost:8000/api/articles')
             commit('set', {
                 stateName: 'articles',
-                articles: { ...articles.data['hydra:member'] },
+                articles: { ...articles.data },
             })
         } catch (error) {
             console.log(error)
@@ -134,11 +134,11 @@ export const actions = {
     async createArticleImage({ commit }, { idArticle, formData }) {
         try {
             await axios.post(`http://localhost:8000/api/imageArticle/${idArticle}`, formData, config())
-            commit('notification/create', { description: 'Vous avez créer un article' }, { root: true })
+            commit('notification/create', { description: 'Les modification on été réaliser avec succèes' }, { root: true })
 
         } catch (error) {
             console.log(error)
-            commit('notification/create', { description: "Problème lors de l'ajout de l'article", type: 'error' }, { root: true })
+            commit('notification/create', { description: "Un problème à eu lieu", type: 'error' }, { root: true })
         }
     },
 
@@ -167,13 +167,19 @@ export const actions = {
 
         } catch (error) {
             console.log(error)
-            commit('notification/create', { description: "Problème lors de l'ajout de l'article", type: 'error' }, { root: true })
+            commit('notification/create', { description: "Problème lors de la mise à jours", type: 'error' }, { root: true })
         }
     },
 
 
+    async deleteArticle({ commit }, { idArticle }) {
+        try {
+            await axios.delete(`http://localhost:8000/api/articles/${idArticle}`, config())
+            commit('notification/create', { description: 'Vous avez supprimé un article' }, { root: true })
 
-
-
-
+        } catch (error) {
+            console.log(error)
+            commit('notification/create', { description: "Problème lors de la suppression de l'article", type: 'error' }, { root: true })
+        }
+    },
 }

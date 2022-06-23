@@ -34,7 +34,7 @@
         lg="2"
         class="d-flex flex-column justify-center"
       >
-        <NuxtLink class="text-center ma-2" to="/" style="color: black"
+        <NuxtLink class="text-center ma-2" to="/articles/list" style="color: black"
           >Tous les articles</NuxtLink
         >
 

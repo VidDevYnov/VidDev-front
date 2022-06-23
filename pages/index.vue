@@ -8,7 +8,6 @@
     <div>
       <v-img height="400" src="image/share.jpg"></v-img>
     </div>
-
     <Title name="Nos derniers articles " />
     <v-row class="justify-space-around ma-5">
       <ArticlesCard

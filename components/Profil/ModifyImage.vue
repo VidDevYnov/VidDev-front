@@ -2,14 +2,14 @@
   <v-col cols="12" md="3">
     <v-card color="pa-5">
       <div class="d-flex justify-space-around">
-        <v-img
-          max-height="200"
-          max-width="200"
-          :src="
-            `http://localhost:8000/images/users/${$props.profil.imageFilePath}` ||
-            '../image/avatar.png'
-          "
-        ></v-img>
+        <v-avatar color="primary" size="200">
+          <v-img
+            :src="
+              `http://localhost:8000/images/users/${$props.profil.imageFilePath}` ||
+              '../image/avatar.png'
+            "
+          ></v-img>
+        </v-avatar>
       </div>
 
       <v-file-input
@@ -21,6 +21,10 @@
         prepend-icon="mdi-camera"
         outlined
         dense
+        :rules="[
+          (value) =>
+            !value || value.size < 2000000 || 'L\'image est obligatoire',
+        ]"
       ></v-file-input>
 
       <v-row class="justify-center">

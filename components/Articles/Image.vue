@@ -1,5 +1,5 @@
 <template>
-  <v-img class="ma-1" :src="$props.path" height="85vh"></v-img>
+  <v-img class="ma-1" :src="$props.path" max-height="450px" max-width="350px"></v-img>
 </template>
 
 <script>
