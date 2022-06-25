@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Title name="Créditer votre compte" />
+    <Title name="Retirer de l'argent de votre compte" />
 
-    <AccountModifySolde type="credit" />
+    <AccountModifySolde type="withdraw" />
   </div>
 </template>
 

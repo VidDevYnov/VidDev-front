@@ -75,6 +75,13 @@
 import { tryConvertStringToNumber } from '../../services/numberHelper'
 
 export default {
+  props: {
+    type: {
+      type: String,
+      required: true,
+    },
+  },
+
   data() {
     return {
       cvv: '',
@@ -101,11 +108,18 @@ export default {
 
   methods: {
     async setSolde() {
+      let newSolde =
+        this.$store.state.user.profil.solde +
+        tryConvertStringToNumber(this.Amount)
+      if (this.$props.type !== 'credit') {
+        newSolde =
+          this.$store.state.user.profil.solde -
+          tryConvertStringToNumber(this.Amount)
+      }
+
       await this.$store.dispatch('user/modifyProfil', {
         user: {
-          solde:
-            this.$store.state.user.profil.solde +
-            tryConvertStringToNumber(this.Amount),
+          solde: newSolde,
         },
         idUser: this.$store.state.user.profil.id,
       })

@@ -72,8 +72,8 @@ export default {
             path: '/user/profil',
           },
           {
-            name: 'Créditer votre compte',
-            path: '/user/creditAccount',
+            name: 'Solde',
+            path: '/user/solde',
           },
           {
             name: 'Paramètre du compte',
