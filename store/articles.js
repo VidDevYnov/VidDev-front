@@ -11,9 +11,9 @@ export const state = () => ({
     types: [],
     materials: [],
     states: [],
-    filter: [],
     pagination: [],
     new: [],
+    lastPageUrl: ""
 
 })
 
@@ -38,7 +38,6 @@ export const actions = {
                 articles: { ...articles.data },
             })
         } catch (error) {
-            console.log(error)
         }
     },
 
@@ -50,24 +49,22 @@ export const actions = {
             )
             commit('set', { stateName: 'article', articles: { ...article.data } })
         } catch (error) {
-            console.log(error)
         }
     },
 
     async setArticlesFilter({ commit }, { url }) {
         try {
             const articles = await axios.get(
-                `http://localhost:8000${url}`
+                `http://localhost:8000${url}`, {
+                headers: {
+                    'content-type': 'application/json',
+                    'Accept': 'application/ld+json'
+                }
+            }
             )
             commit('set', { stateName: 'articles', articles: { ...articles.data['hydra:member'] } })
-
-            commit('set', { stateName: 'pagination', articles: { ...articles.data['hydra:view'] } })
-            console.log(articles.data['hydra:view'])
-
-
-
+            commit('set', { stateName: 'lastPageUrl', articles: articles.data['hydra:view']['hydra:last'] })
         } catch (error) {
-            console.log(error)
         }
     },
 
@@ -104,17 +101,14 @@ export const actions = {
                 articles: [...etat.data],
             })
         } catch (error) {
-            console.log(error)
         }
     },
     async createArticle({ commit, dispatch }, { article, idUser, formData }) {
         try {
 
-            console.log(article)
 
             article.price = tryConvertStringToNumber(article.price)
 
-            console.log(article.price)
             article.user = `api/users/${idUser}`
 
             const newArticle = await axios.post('http://localhost:8000/api/articles', {
@@ -126,7 +120,6 @@ export const actions = {
             dispatch('createArticleImage', { idArticle: newArticle.data.id, formData })
 
         } catch (error) {
-            console.log(error)
             commit('notification/create', { description: "Problème lors de l'ajout de l'article", type: 'error' }, { root: true })
         }
     },
@@ -137,15 +130,12 @@ export const actions = {
             commit('notification/create', { description: 'Les modification on été réaliser avec succèes' }, { root: true })
 
         } catch (error) {
-            console.log(error)
             commit('notification/create', { description: "Un problème à eu lieu", type: 'error' }, { root: true })
         }
     },
 
     async modifyArticle({ commit }, { article }) {
         try {
-            console.log(article);
-
             const articleId = article.id
             article = {
                 "name": article.name,
@@ -160,13 +150,10 @@ export const actions = {
                 "articleCategory": `api/article_categories/${article.articleCategory.id}`,
             }
 
-            console.log(article);
-
             await axios.put(`http://localhost:8000/api/articles/${articleId}`, article, config())
             commit('notification/create', { description: 'Votre article à bien été mis à jours' }, { root: true })
 
         } catch (error) {
-            console.log(error)
             commit('notification/create', { description: "Problème lors de la mise à jours", type: 'error' }, { root: true })
         }
     },
@@ -178,7 +165,6 @@ export const actions = {
             commit('notification/create', { description: 'Vous avez supprimé un article' }, { root: true })
 
         } catch (error) {
-            console.log(error)
             commit('notification/create', { description: "Problème lors de la suppression de l'article", type: 'error' }, { root: true })
         }
     },

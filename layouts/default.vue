@@ -9,7 +9,7 @@
             :id="notification.id"
             :key="notification.id"
           />
-          <router-view></router-view>
+          <router-view :key="$route.fullPath"></router-view>
         </v-container>
       </v-main>
       <MenuFooter />

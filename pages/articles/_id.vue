@@ -26,6 +26,8 @@
         </v-col>
       </v-col>
     </v-row>
+    <SubTitle name="Autre article" class="my-5" />
+    <MemberDressing :member="member" />
   </div>
 </template>
 
@@ -39,6 +41,13 @@ export default {
       }
       return {}
     },
+    member() {
+      const member = this.$store.state.member.member
+      if (member.length !== 0) {
+        return member
+      }
+      return {}
+    },
   },
   created() {
     this.getArticle()
@@ -48,6 +57,14 @@ export default {
       await this.$store.dispatch('articles/setArticle', {
         idArticle: this.$route.params.id,
       })
+      await this.getMember()
+    },
+
+    async getMember() {
+      await this.$store.dispatch(
+        'member/setMember',
+        this.$store.state.articles.article.user.id
+      )
     },
   },
 }
