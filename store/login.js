@@ -17,6 +17,7 @@ export const actions = {
             this.$router.push('/user/profil')
         } catch (error) {
             commit('notification/create', { description: 'Problème lors de la connection', type: 'error' }, { root: true })
+    
         }
     },
 
