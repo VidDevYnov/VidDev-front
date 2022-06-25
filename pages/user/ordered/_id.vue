@@ -1,5 +1,8 @@
 <template>
-      <PaymentRecapOrder :article="article" :profil="profil" />
+  <div>
+    <ProfilHeader class="my-4" :profil="profil" />
+    <PaymentRecapOrder :article="article" :profil="profil" />
+  </div>
 </template>
 
 <script>

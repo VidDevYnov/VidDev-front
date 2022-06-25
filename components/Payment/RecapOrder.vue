@@ -63,7 +63,7 @@
       <v-col cols="4">
         <div class="ma-5">
           <v-card class="mx-auto ma-5 pa-2">
-            <v-list-item three-line>
+            <v-list-item>
               <v-list-item-content>
                 <div class="text-overline mb-4">Resumé de la Commande</div>
 
@@ -76,6 +76,42 @@
                 <v-list-item-subtitle
                   >Point à gagner: {{ Point }}
                 </v-list-item-subtitle>
+                <div v-if="!isActive" class="my-4">
+                  Ajouter une remise grace à vos points
+                  <v-icon
+                    class="mr-4"
+                    :class="{ active: isActive }"
+                    @click="isActive = !isActive"
+                    >mdi-plus-circle-outline
+                  </v-icon>
+                </div>
+                <div v-else class="my-4">
+                  Ne pas mettre de remise
+                  <v-icon
+                    class="mr-4"
+                    :class="{ active: isActive }"
+                    @click="isActive = !isActive"
+                  >
+                    mdi-minus-circle-outline
+                  </v-icon>
+                </div>
+
+                <v-text-field
+                  v-if="isActive"
+                  v-model="remise"
+                  :rules="[
+                    (v) => !!v || 'Veuillez entrer une remise',
+                    (v) => !isNaN(Number(v)) || 'La remise doit être un nombre',
+                    (v) => v <= 50 || 'La remise ne peut dépasser 50%',
+                    (v) =>
+                      v <= $props.profil.point ||
+                      'Vous  n\'avez pas assez de point',
+                  ]"
+                  label="Remise en %"
+                  outlined
+                  class="my-5"
+                  >%</v-text-field
+                >
                 <div class="text-overline mb-4">Total {{ Totalprice }} €</div>
               </v-list-item-content>
             </v-list-item>
@@ -101,6 +137,7 @@ import {
   displayPrice,
   setPoint,
   setCommition,
+  setRemise,
 } from '../../services/priceHelper'
 import { tryConvertStringToNumber } from '../../services/numberHelper'
 
@@ -119,6 +156,8 @@ export default {
     return {
       address: '',
       isFormValid: false,
+      remise: 0,
+      isActive: false,
     }
   },
   computed: {
@@ -137,7 +176,14 @@ export default {
       return {}
     },
     Totalprice() {
-      return displayPrice(this.$props.article.price) || '0'
+      const total = displayPrice(this.$props.article.price) || '0'
+      if (this.remise !== 0) {
+        return setRemise(
+          tryConvertStringToNumber(total),
+          tryConvertStringToNumber(this.remise)
+        )
+      }
+      return total
     },
     Point() {
       return setPoint(this.$props.article.price) || '0'
@@ -152,13 +198,14 @@ export default {
       await this.$store.dispatch('order/orderArticle', {
         user: this.$props.profil,
         order: {
-          price: tryConvertStringToNumber(this.$props.article.price),
+          price: tryConvertStringToNumber(this.Totalprice),
           commission: tryConvertStringToNumber(this.Commition),
           point: tryConvertStringToNumber(this.Point),
           address: `/api/addresses/${this.address.id}`,
           user: `/api/users/${this.$props.profil.id}`,
         },
         article: this.$props.article,
+        remise: tryConvertStringToNumber(this.remise),
       })
       // this.$router.push('/')
     },

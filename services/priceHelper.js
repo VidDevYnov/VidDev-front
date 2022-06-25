@@ -12,3 +12,8 @@ export function setCommition(price) {
 export function setPoint(price) {
     return Math.round((price * 10) / 100)
 }
+
+export function setRemise(price, remise) {
+
+    return (price - (remise * price) / 100).toFixed(2);
+}
