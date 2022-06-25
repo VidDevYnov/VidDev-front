@@ -117,13 +117,20 @@ export default {
           tryConvertStringToNumber(this.Amount)
       }
 
-      await this.$store.dispatch('user/modifyProfil', {
-        user: {
-          solde: newSolde,
-        },
-        idUser: this.$store.state.user.profil.id,
-      })
-      this.$router.push('/user/profil')
+      if (newSolde >= 0) {
+        await this.$store.dispatch('user/modifyProfil', {
+          user: {
+            solde: newSolde,
+          },
+          idUser: this.$store.state.user.profil.id,
+        })
+        this.$router.push('/user/profil')
+      } else {
+        this.$store.commit('notification/create', {
+          description: 'Votre solde ne peut pas être inférieur à 0',
+          type: 'error',
+        })
+      }
     },
   },
 }
