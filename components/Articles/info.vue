@@ -1,7 +1,7 @@
 <template>
   <v-card class="pa-4 ma-1 d-flex flex-column justify-space-around">
     <p class="ml-2">Nom de l'article: {{ $props.article.name }}</p>
-    <p class="ml-2">Prix: {{ $props.article.price }},00€</p>
+    <p class="ml-2">Prix: {{ price || 0 }}€</p>
     <p class="ml-2">
       Taille:
       {{ getWorded($props.article.articleSize) }}
@@ -23,6 +23,8 @@
 </template>
 
 <script>
+import { displayPrice } from '../../services/priceHelper'
+
 export default {
   props: {
     article: {
@@ -38,6 +40,9 @@ export default {
         }
         return type
       }
+    },
+    price() {
+      return displayPrice(this.$props.article.price)
     },
   },
 }
