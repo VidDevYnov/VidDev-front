@@ -1,7 +1,7 @@
 <template>
   <v-card class="pa-4 ma-1 d-flex flex-column justify-space-around">
     <p class="ml-2">Nom de l'article: {{ $props.article.name }}</p>
-    <p class="ml-2">Prix: {{ price || 0 }}€</p>
+    <p class="ml-2">Prix: {{ price }}€</p>
     <p class="ml-2">
       Taille:
       {{ getWorded($props.article.articleSize) }}
@@ -16,9 +16,12 @@
 
     <div class="d-flex flex-column align-center">
       <v-btn outlined width="220" class="ma-2"> FAVORIS</v-btn>
-  <NuxtLink to="/payment/shop">
-      <v-btn outlined width="220" class="ma-2"> ACHETER</v-btn>
-  </NuxtLink>
+      <NuxtLink
+        :to="`/user/ordered/${$props.article.id}`"
+        class="text-decoration-none"
+      >
+        <v-btn outlined width="220" class="ma-2"> ACHETER</v-btn>
+      </NuxtLink>
     </div>
   </v-card>
 </template>
