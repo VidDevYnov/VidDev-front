@@ -15,21 +15,14 @@
               </v-col>
               <v-col cols="6">
                 <Select
-                  :items="
-                    setFilter(
-                      $store.state.articles.categories,
-                      'article_categories'
-                    )
-                  "
+                  :items="setFilter($store.state.articles.categories)"
                   :get="$props.article.articleCategory || {}"
                   :rules="[(v) => !!v || 'La categorie est obligatoire']"
                   label="Catégorie *"
                   :fieldName="['articles', 'article', 'articleCategory']"
                 />
                 <Select
-                  :items="
-                    setFilter($store.state.articles.states, 'article_states')
-                  "
+                  :items="setFilter($store.state.articles.states)"
                   :get="$props.article.articleState || {}"
                   :rules="[(v) => !!v || 'L\'état est obligatoire']"
                   label="Etat *"
@@ -43,9 +36,7 @@
                 />
 
                 <Select
-                  :items="
-                    setFilter($store.state.articles.types, 'article_types')
-                  "
+                  :items="setFilter($store.state.articles.types)"
                   :get="$props.article.articleType || {}"
                   :rules="[(v) => !!v || 'Le type est obligatoire']"
                   label="Type *"
@@ -60,9 +51,7 @@
                   :fieldName="['articles', 'article', 'brand']"
                 />
                 <Select
-                  :items="
-                    setFilter($store.state.articles.sizes, 'article_sizes')
-                  "
+                  :items="setFilter($store.state.articles.sizes)"
                   :get="$props.article.articleSize || {}"
                   :rules="[(v) => !!v || 'La taille est obligatoire']"
                   label="Taille"
@@ -70,12 +59,7 @@
                 />
 
                 <Select
-                  :items="
-                    setFilter(
-                      $store.state.articles.materials,
-                      'article_materials'
-                    )
-                  "
+                  :items="setFilter($store.state.articles.materials)"
                   :get="$props.article.articleMaterial || {}"
                   :rules="[(v) => !!v || 'La matière est obligatoire']"
                   label="Matière"
@@ -151,7 +135,7 @@
         </v-col>
         <v-col class="d-flex align-center">
           <v-row class="ma-2 justify-center">
-            <v-btn outlined @click="deleteArticle" color="red lighten-1">
+            <v-btn outlined color="red lighten-1" @click="deleteArticle">
               Supprimer l'article</v-btn
             >
           </v-row>
@@ -180,7 +164,7 @@ export default {
   },
   computed: {
     setFilter() {
-      return (stateFiltre, nameId) => {
+      return (stateFiltre) => {
         if (stateFiltre.length > 0) {
           const tabFilter = []
           stateFiltre.map(function (value, key) {
@@ -211,7 +195,6 @@ export default {
     async updateArticleImage() {
       const formData = new FormData()
       formData.append('file', this.image)
-      console.log(this.image)
       await this.$store.dispatch('articles/createArticleImage', {
         formData,
         idArticle: this.$props.article.id,

@@ -14,6 +14,7 @@
         v-for="article in $store.state.articles.articles"
         :key="article.id"
         :article="article"
+        :user="article.user"
       />
     </v-row>
   </div>

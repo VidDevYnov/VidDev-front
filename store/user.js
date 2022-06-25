@@ -48,14 +48,15 @@ export const actions = {
 
     async modifyProfil({ commit }, { user, idUser }) {
         try {
-
+            console.log(user)
             await axios.put(`http://localhost:8000/api/users/${idUser}`,
                 user,
                 config()
             )
             commit('notification/create', { description: 'Le profil à bien été mis en à jour' }, { root: true })
         } catch (error) {
-            commit('notification/create', { description: 'Problème lors de la récupération de votre profil', type: 'error' }, { root: true })
+            console.log(error)
+            commit('notification/create', { description: 'Problème lors de la mise à jour', type: 'error' }, { root: true })
         }
     },
 

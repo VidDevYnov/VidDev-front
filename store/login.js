@@ -33,8 +33,6 @@ export const actions = {
             localStorage.setItem('token', res.data.token)
 
         } catch (error) {
-            console.log('Cron Nok')
-            console.log(error)
         }
     },
 }
