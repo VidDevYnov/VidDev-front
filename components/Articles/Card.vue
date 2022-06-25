@@ -35,7 +35,7 @@
         ></v-img>
       </NuxtLink>
 
-      <div class="ma-2">Prix: {{ $props.article.price }},00€</div>
+      <div class="ma-2">Prix: {{ price }}€</div>
 
       <div class="ma-2">Taille: {{ $props.article.articleSize.worded }}</div>
 
@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import { displayPrice } from '../../services/priceHelper'
+
 export default {
   props: {
     article: {
@@ -54,6 +56,12 @@ export default {
     user: {
       type: Object,
       required: true,
+    },
+  },
+
+  computed: {
+    price() {
+      return displayPrice(this.$props.article.price)
     },
   },
 }
