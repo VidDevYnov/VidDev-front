@@ -7,7 +7,7 @@
     <v-row class="justify-space-around my-3 mx-0">
       <ArticlesCardAdd />
       <v-col
-        v-for="(article, index) in profil.articles"
+        v-for="(article, index) in articles"
         :key="index"
         cols="7"
         sm="4"
@@ -40,6 +40,13 @@ export default {
       }
       return {}
     },
+    articles() {
+      const articles = this.$store.state.articles.userArticles
+      if (articles.length !== 0) {
+        return articles
+      }
+      return {}
+    },
   },
   created() {
     this.getProfil()
@@ -47,6 +54,7 @@ export default {
   methods: {
     async getProfil() {
       await this.$store.dispatch('user/setProfil')
+      await this.$store.dispatch('articles/setUserArticles', this.profil.id)
     },
   },
 }

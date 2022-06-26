@@ -27,7 +27,7 @@
       </v-col>
     </v-row>
     <SubTitle name="Autre article" class="my-5" />
-    <MemberDressing :member="member" />
+    <MemberDressing :articles="articles" />
   </div>
 </template>
 
@@ -48,6 +48,13 @@ export default {
       }
       return {}
     },
+    articles() {
+      const articles = this.$store.state.articles.userArticles
+      if (articles.length !== 0) {
+        return articles
+      }
+      return {}
+    },
   },
   created() {
     this.getArticle()
@@ -65,6 +72,9 @@ export default {
         'member/setMember',
         this.$store.state.articles.article.user.id
       )
+      await this.$store.dispatch('articles/setUserArticles', {
+        idUser: this.$store.state.articles.article.user.id,
+      })
     },
   },
 }

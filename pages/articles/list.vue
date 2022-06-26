@@ -142,7 +142,7 @@ export default {
     },
     async getArticles(page) {
       await this.$store.dispatch('articles/setArticlesFilter', {
-        url: `/api/articles?articleCategory=${this.filter.categories}&articleSize=${this.filter.sizes}&articleState=${this.filter.states}&articleType=${this.filter.types}&articleMaterial=${this.filter.materials}&page=${page}`,
+        url: `/api/articles?articleCategory=${this.filter.categories}&articleSize=${this.filter.sizes}&articleState=${this.filter.states}&articleType=${this.filter.types}&articleMaterial=${this.filter.materials}&page=${page}&exists[orderArticle]=false`,
       })
     },
   },

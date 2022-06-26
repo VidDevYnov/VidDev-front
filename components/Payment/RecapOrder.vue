@@ -195,19 +195,27 @@ export default {
 
   methods: {
     async setOrder() {
-      await this.$store.dispatch('order/orderArticle', {
-        user: this.$props.profil,
-        order: {
-          price: tryConvertStringToNumber(this.Totalprice),
-          commission: tryConvertStringToNumber(this.Commition),
-          point: tryConvertStringToNumber(this.Point),
-          address: `/api/addresses/${this.address.id}`,
-          user: `/api/users/${this.$props.profil.id}`,
-        },
-        article: this.$props.article,
-        remise: tryConvertStringToNumber(this.remise),
-      })
-      // this.$router.push('/')
+      if (this.Totalprice < this.$store.state.user.profil.solde) {
+        await this.$store.dispatch('order/orderArticle', {
+          user: this.$props.profil,
+          order: {
+            price: tryConvertStringToNumber(this.Totalprice),
+            commission: tryConvertStringToNumber(this.Commition),
+            point: tryConvertStringToNumber(this.Point),
+            address: `/api/addresses/${this.address.id}`,
+            user: `/api/users/${this.$props.profil.id}`,
+          },
+          article: this.$props.article,
+          remise: tryConvertStringToNumber(this.remise),
+        })
+        this.$router.push('/')
+      } else {
+        this.$store.commit('notification/create', {
+          description:
+            "Vous n'avez pas assez dans votre solde veillez créditer votre compte",
+          type: 'error',
+        })
+      }
     },
   },
 }
