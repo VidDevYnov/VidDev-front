@@ -1,6 +1,7 @@
 <template>
-  <div class="d-flex">
-    <PaymentRecapOrder :article="article" />
+  <div>
+    <ProfilHeader class="my-4" :profil="profil" />
+    <PaymentRecapOrder :article="article" :profil="profil" />
   </div>
 </template>
 
@@ -14,16 +15,26 @@ export default {
       }
       return {}
     },
-
-    created() {
-      this.getArticle()
+    profil() {
+      const profil = this.$store.state.user.profil
+      if (profil.length !== 0) {
+        return profil
+      }
+      return {}
     },
+  },
+  created() {
+    this.getArticle()
+    this.getProfil()
   },
   methods: {
     async getArticle() {
       await this.$store.dispatch('articles/setArticle', {
         idArticle: this.$route.params.id,
       })
+    },
+    async getProfil() {
+      await this.$store.dispatch('user/setProfil')
     },
   },
 }

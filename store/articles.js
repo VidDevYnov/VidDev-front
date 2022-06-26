@@ -4,6 +4,7 @@ import { config } from '../services/tokenHelper'
 
 
 export const state = () => ({
+    userArticles: [],
     articles: [],
     article: [],
     categories: [],
@@ -30,9 +31,21 @@ export const mutations = {
 }
 
 export const actions = {
+    async setUserArticles({ commit }, idUser) {
+        try {
+            const articles = await axios.get(`http://localhost:8000/api/articles?exists[orderArticle]=false&user=${idUser}`)
+            commit('set', {
+                stateName: 'userArticles',
+                articles: { ...articles.data },
+            })
+
+            console.log(articles)
+        } catch (error) {
+        }
+    },
     async setArticles({ commit }) {
         try {
-            const articles = await axios.get('http://localhost:8000/api/articles')
+            const articles = await axios.get('http://localhost:8000/api/articles?exists[orderArticle]=false')
             commit('set', {
                 stateName: 'articles',
                 articles: { ...articles.data },

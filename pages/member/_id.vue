@@ -2,7 +2,7 @@
   <div class="d-flex flex-column justify-center">
     <MemberInfo :member="member" />
     <SubTitle name="Vide dressing" />
-    <MemberDressing :member="member" />
+    <MemberDressing :articles="articles" />
   </div>
 </template>
 
@@ -22,6 +22,13 @@ export default {
       }
       return {}
     },
+    articles() {
+      const articles = this.$store.state.articles.userArticles
+      if (articles.length !== 0) {
+        return articles
+      }
+      return {}
+    },
   },
   created() {
     this.getMember()
@@ -29,6 +36,10 @@ export default {
   methods: {
     async getMember() {
       await this.$store.dispatch('member/setMember', this.$route.params.id)
+      await this.$store.dispatch(
+        'articles/setUserArticles',
+        this.$route.params.id
+      )
     },
   },
 }
