@@ -41,13 +41,6 @@ export default {
       }
       return {}
     },
-    member() {
-      const member = this.$store.state.member.member
-      if (member.length !== 0) {
-        return member
-      }
-      return {}
-    },
     articles() {
       const articles = this.$store.state.articles.userArticles
       if (articles.length !== 0) {
@@ -64,17 +57,18 @@ export default {
       await this.$store.dispatch('articles/setArticle', {
         idArticle: this.$route.params.id,
       })
-      await this.getMember()
+      await this.getArticleUser()
     },
 
-    async getMember() {
+    async getArticleUser() {
       await this.$store.dispatch(
         'member/setMember',
         this.$store.state.articles.article.user.id
       )
-      await this.$store.dispatch('articles/setUserArticles', {
-        idUser: this.$store.state.articles.article.user.id,
-      })
+      await this.$store.dispatch(
+        'articles/setUserArticles',
+        this.$store.state.articles.article.user.id
+      )
     },
   },
 }

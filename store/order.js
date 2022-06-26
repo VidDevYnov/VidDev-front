@@ -32,13 +32,56 @@ export const actions = {
             dispatch('user/modifyProfil', { idUser: article.user.id, user: setUserArticle }, { root: true })
 
 
+            dispatch('sendMailBuyeur', { order, user, article })
+
+
             commit('notification/create', {
                 description: 'Votre commande c\'est bien passé'
             }, { root: true })
+
+
 
         } catch (error) {
             commit('notification/create', { description: "Problème lors de la commande", type: 'error' }, { root: true })
         }
     },
 
+    async sendMailBuyeur({ commit }, { order, user, article }) {
+        try {
+
+            const test = await axios.put("http://localhost:8000/emailBuyeur", {
+
+                article,
+                order,
+                user
+
+            }, config())
+            console.log(test)
+
+
+        } catch (error) {
+        }
+    },
+
+    async sendMailSeller({ commit }, { user, article, buyeur }) {
+        try {
+            console.log(user)
+            console.log(article)
+            console.log(buyeur)
+
+            const test = await axios.put("http://localhost:8000/emailSeller", {
+
+                article,
+                buyeur,
+                user
+
+            }, config())
+
+
+            console.log(test)
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
 }

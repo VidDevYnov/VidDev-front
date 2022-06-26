@@ -208,6 +208,7 @@ export default {
           article: this.$props.article,
           remise: tryConvertStringToNumber(this.remise),
         })
+        this.sendMailSeller()
         this.$router.push('/')
       } else {
         this.$store.commit('notification/create', {
@@ -216,6 +217,18 @@ export default {
           type: 'error',
         })
       }
+    },
+
+    async sendMailSeller() {
+      await this.$store.dispatch('order/sendMailSeller', {
+        user: this.$props.article.user,
+        article: this.$props.article,
+        buyeur: {
+          firstName: this.$props.profil.firstName,
+          lastName: this.$props.profil.lastName,
+          addresse: `${this.address.address} ${this.address.city} ${this.address.postalCode} ${this.address.country}`,
+        },
+      })
     },
   },
 }

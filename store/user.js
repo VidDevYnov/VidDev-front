@@ -53,10 +53,8 @@ export const actions = {
                 user,
                 config()
             )
-            commit('notification/create', { description: 'Le profil à bien été mis en à jour' }, { root: true })
         } catch (error) {
             console.log(error)
-            commit('notification/create', { description: 'Problème lors de la mise à jour', type: 'error' }, { root: true })
         }
     },
 
