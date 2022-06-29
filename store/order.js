@@ -7,9 +7,9 @@ export const actions = {
 
     async orderArticle({ commit, dispatch }, { order, user, article, remise }) {
         try {
-            const setorder = await axios.post(`http://localhost:8000/api/orders`, order, config())
+            const setorder = await axios.post(`${process.env.path}/api/orders`, order, config())
 
-            await axios.put(`http://localhost:8000/api/articles/${article.id}`, { orderArticle: `api/orders/${setorder.data.id}` }, config())
+            await axios.put(`${process.env.path}/api/articles/${article.id}`, { orderArticle: `api/orders/${setorder.data.id}` }, config())
 
 
             let setPoint = user.point
@@ -49,7 +49,7 @@ export const actions = {
     async sendMailBuyeur({ commit }, { order, user, article }) {
         try {
 
-            const test = await axios.put("http://localhost:8000/emailBuyeur", {
+            const test = await axios.put(`${process.env.path}/emailBuyeur`, {
 
                 article,
                 order,
@@ -69,7 +69,7 @@ export const actions = {
             console.log(article)
             console.log(buyeur)
 
-            const test = await axios.put("http://localhost:8000/emailSeller", {
+            const test = await axios.put(`${process.env.path}/emailSeller`, {
 
                 article,
                 buyeur,

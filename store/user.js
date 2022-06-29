@@ -23,7 +23,7 @@ export const mutations = {
 export const actions = {
     async createUser({ commit }, { user }) {
         try {
-            await axios.post('http://localhost:8000/api/users', {
+            await axios.post(`${process.env.path}/api/users`, {
                 ...user
             })
             commit('notification/create', { description: 'Vous êtes inscrit' }, { root: true })
@@ -37,11 +37,14 @@ export const actions = {
     async setProfil({ commit }) {
         try {
 
-            const profil = await axios.get('http://localhost:8000/api/profil',
+            const profil = await axios.get(`${process.env.path}/api/profil`,
                 config()
             )
             commit('set', { stateName: 'profil', user: { ...profil.data } })
+
         } catch (error) {
+            console.log(error)
+
             commit('notification/create', { description: 'Problème lors de la récupération de votre profil', type: 'error' }, { root: true })
         }
     },
@@ -49,7 +52,7 @@ export const actions = {
     async modifyProfil({ commit }, { user, idUser }) {
         try {
             console.log(user)
-            await axios.put(`http://localhost:8000/api/users/${idUser}`,
+            await axios.put(`${process.env.path}/api/users/${idUser}`,
                 user,
                 config()
             )
@@ -61,7 +64,7 @@ export const actions = {
 
     async modifyAddress({ commit }, { address, idAddress }) {
         try {
-            await axios.put(`http://localhost:8000/api/addresses/${idAddress}`,
+            await axios.put(`${process.env.path}/api/addresses/${idAddress}`,
                 address,
                 config()
             )
@@ -74,7 +77,7 @@ export const actions = {
 
     async deleteAddress({ commit }, { idAddress }) {
         try {
-            await axios.delete(`http://localhost:8000/api/addresses/${idAddress}`,
+            await axios.delete(`${process.env.path}/api/addresses/${idAddress}`,
                 config()
             )
             commit('notification/create', { description: 'L\'adresse à bien été supprimé' }, { root: true })
@@ -86,7 +89,7 @@ export const actions = {
 
     async addAddress({ commit }, { user, address }) {
         try {
-            await axios.post(`http://localhost:8000/api/addresses`,
+            await axios.post(`${process.env.path}/api/addresses`,
                 { ...address, user },
                 config()
             )
@@ -99,7 +102,7 @@ export const actions = {
 
     async addProfilImage({ commit }, { idUser, formData }) {
         try {
-            await axios.post(`http://localhost:8000/api/imageUser/${idUser}`, formData, config()
+            await axios.post(`${process.env.path}/api/imageUser/${idUser}`, formData, config()
             )
             commit('notification/create', { description: 'L\'image à bien été ajouté' }, { root: true })
 

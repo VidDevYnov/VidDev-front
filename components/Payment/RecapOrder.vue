@@ -18,7 +18,7 @@
 
               <v-list-item-avatar tile size="80">
                 <v-img
-                  :src="`http://localhost:8000/images/articles/${$props.article.imageFilePath}`"
+                  :src="`${path}/images/articles/${$props.article.imageFilePath}`"
                 ></v-img
               ></v-list-item-avatar>
             </v-list-item>
@@ -190,6 +190,10 @@ export default {
     },
     Commition() {
       return setCommition(this.$props.article.price) || '0'
+    },
+
+    path() {
+      return process.env.path
     },
   },
 
