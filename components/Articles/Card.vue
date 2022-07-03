@@ -12,7 +12,7 @@
               <v-img
                 class="elevation-6"
                 alt=""
-                :src="`http://localhost:8000/images/users/${$props.user.imageFilePath}`"
+                :src="`${path}/images/users/${$props.user.imageFilePath}`"
               ></v-img>
             </v-list-item-avatar>
             <v-list-item-content>
@@ -31,7 +31,7 @@
         <v-img
           height="200"
           width="250"
-          :src="`http://localhost:8000/images/articles/${$props.article.imageFilePath}`"
+          :src="`${path}/images/articles/${$props.article.imageFilePath}`"
         ></v-img>
       </NuxtLink>
 
@@ -62,6 +62,9 @@ export default {
   computed: {
     price() {
       return displayPrice(this.$props.article.price)
+    },
+    path() {
+      return process.env.path
     },
   },
 }

@@ -27,6 +27,13 @@
         Connexion</v-btn
       >
     </div>
+    <NuxtLink
+      to="/auth/register"
+      class="text-decoration-none ma-10 d-flex align-center d-flex justify-center"
+      style="color : white"
+    >
+      Pas de compte ? Inscrivez-vous
+    </NuxtLink>
   </div>
 </template>
 

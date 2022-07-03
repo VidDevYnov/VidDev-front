@@ -10,7 +10,7 @@
         class="d-flex justify-center align-center"
       >
         <ArticlesImage
-          :path="`http://localhost:8000/images/articles/${article.imageFilePath}`"
+          :path="`${path}/images/articles/${article.imageFilePath}`"
         />
       </v-col>
 
@@ -47,6 +47,9 @@ export default {
         return articles
       }
       return {}
+    },
+    path() {
+      return process.env.path
     },
   },
   created() {

@@ -8,7 +8,7 @@
     >
       <v-img
         height="250px"
-        :src="`http://localhost:8000/images/articles/${article.imageFilePath}`"
+        :src="`${path}/images/articles/${article.imageFilePath}`"
       ></v-img>
     </v-card>
   </NuxtLink>
@@ -20,6 +20,12 @@ export default {
     article: {
       type: Object,
       required: true,
+    },
+  },
+
+  computed: {
+    path() {
+      return process.env.path
     },
   },
 }

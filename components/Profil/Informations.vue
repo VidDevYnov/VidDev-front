@@ -5,7 +5,7 @@
         <v-avatar color="primary" size="200">
           <v-img
             :src="
-              `http://localhost:8000/images/users/${$props.profil.imageFilePath}` ||
+              `${path}/images/users/${$props.profil.imageFilePath}` ||
               '../image/avatar.png'
             "
           ></v-img>
@@ -58,6 +58,11 @@ export default {
     profil: {
       type: Object,
       required: true,
+    },
+  },
+  computed: {
+    path() {
+      return process.env.path
     },
   },
 }

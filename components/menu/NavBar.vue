@@ -7,15 +7,6 @@
         </NuxtLink>
       </v-col>
       <v-col cols="8" sm="9" md="10" lg="11" class="d-flex justify-end pa-0">
-        <div class="d-flex flex-column justify-center ma-2">
-          <v-icon>mdi-message</v-icon>
-        </div>
-        <div class="d-flex flex-column justify-center ma-2">
-          <v-icon>mdi-bell</v-icon>
-        </div>
-        <div class="d-flex flex-column justify-center ma-2">
-          <v-icon>mdi-basket</v-icon>
-        </div>
         <div class="d-flex flex-column justify-center">
           <v-app-bar-nav-icon
             @click="isActive = !isActive"
@@ -35,18 +26,11 @@
         class="d-flex flex-column justify-center"
       >
         <NuxtLink
-          class="text-center ma-2"
-          to="/articles/list"
-          style="color: black"
-          >Tous les articles</NuxtLink
-        >
-
-        <NuxtLink
-          class="text-center ma-2"
-          style="color: black"
           v-for="button in listButton"
           :key="button.name"
           :to="button.path"
+          class="text-center ma-2"
+          style="color: black"
         >
           {{ button.name }}
         </NuxtLink>
@@ -65,8 +49,12 @@ export default {
   },
   computed: {
     listButton() {
-      if (localStorage.getItem('token')) {
+      if (this.$cookiz.get('role') === 'ROLE_USER') {
         return [
+          {
+            name: 'Tous les articles',
+            path: '/articles/list',
+          },  
           {
             name: 'Profil',
             path: '/user/profil',
@@ -84,8 +72,27 @@ export default {
             path: '/auth/logout',
           },
         ]
+      } else if (this.$cookiz.get('role') === 'ROLE_ADMIN') {
+        return [
+          {
+            name: 'Tableau de bord',
+            path: '/admin/dashboard',
+          },
+          {
+            name: 'Gestion des filtres',
+            path: '/admin/filter',
+          },
+          {
+            name: 'Déconnexion',
+            path: '/auth/logout',
+          },
+        ]
       }
       return [
+        {
+          name: 'Tous les articles',
+          path: '/articles/list',
+        },
         {
           name: 'Connection',
           path: '/auth/login',

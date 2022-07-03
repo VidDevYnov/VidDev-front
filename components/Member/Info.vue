@@ -4,7 +4,7 @@
       <v-avatar color="primary" size="200">
         <v-img
           :src="
-            `http://localhost:8000/images/users/${$props.member.imageFilePath}` ||
+            `${path}/images/users/${$props.member.imageFilePath}` ||
             '../image/avatar.png'
           "
         ></v-img>
@@ -49,6 +49,11 @@ export default {
     member: {
       type: Object,
       required: true,
+    },
+  },
+  computed: {
+    path() {
+      return process.env.path
     },
   },
 }

@@ -102,7 +102,7 @@
                 max-height="250"
                 max-width="200"
                 :src="
-                  `http://localhost:8000/images/articles/${$props.article.imageFilePath}` ||
+                  `${path}/images/articles/${$props.article.imageFilePath}` ||
                   '../image/avatar.png'
                 "
               ></v-img>
@@ -177,6 +177,10 @@ export default {
         }
         return []
       }
+    },
+
+    path() {
+      return process.env.path
     },
   },
   created() {

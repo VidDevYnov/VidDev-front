@@ -7,9 +7,9 @@ export const actions = {
 
     async orderArticle({ commit, dispatch }, { order, user, article, remise }) {
         try {
-            const setorder = await axios.post(`http://localhost:8000/api/orders`, order, config())
+            const setorder = await axios.post(`${process.env.path}/api/orders`, order, config())
 
-            await axios.put(`http://localhost:8000/api/articles/${article.id}`, { orderArticle: `api/orders/${setorder.data.id}` }, config())
+            await axios.put(`${process.env.path}/api/articles/${article.id}`, { orderArticle: `api/orders/${setorder.data.id}` }, config())
 
 
             let setPoint = user.point
@@ -49,38 +49,31 @@ export const actions = {
     async sendMailBuyeur({ commit }, { order, user, article }) {
         try {
 
-            const test = await axios.put("http://localhost:8000/emailBuyeur", {
+            await axios.put(`${process.env.path}/emailBuyeur`, {
 
                 article,
                 order,
                 user
 
             }, config())
-            console.log(test)
-
 
         } catch (error) {
+            commit('notification/create', { description: "Problème lors de l'envoie du mail", type: 'error' }, { root: true })
         }
     },
 
     async sendMailSeller({ commit }, { user, article, buyeur }) {
         try {
-            console.log(user)
-            console.log(article)
-            console.log(buyeur)
 
-            const test = await axios.put("http://localhost:8000/emailSeller", {
-
+            await axios.put(`${process.env.path}/emailSeller`, {
                 article,
                 buyeur,
                 user
 
             }, config())
 
-
-            console.log(test)
         } catch (error) {
-            console.log(error)
+            commit('notification/create', { description: "Problème lors de l'envoie du mail", type: 'error' }, { root: true })
         }
 
     }
