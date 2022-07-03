@@ -1,8 +1,11 @@
+<template>
+  <Title name="Deconnexion ..."></Title>
+</template>
+
 <script>
 export default {
   created() {
-    localStorage.removeItem('refresh_token')
-    localStorage.removeItem('token')
+    this.$cookiz.removeAll()
     this.$router.push('/')
   },
 }

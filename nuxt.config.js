@@ -43,6 +43,8 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/dotenv',
+    ['cookie-universal-nuxt', { alias: 'cookiz', parseJSON: false }],
+
   ],
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify

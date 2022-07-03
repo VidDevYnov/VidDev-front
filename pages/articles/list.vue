@@ -53,11 +53,11 @@
               ></v-select>
 
               <v-btn
+                outlined
+                color="black"
                 class="ma-4 d-flex"
                 style="color: white"
                 @click="getArticles(1)"
-                outlined
-                color="black"
               >
                 Filtrer</v-btn
               >

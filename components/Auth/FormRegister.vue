@@ -47,6 +47,20 @@
         Inscription</v-btn
       >
     </v-row>
+    <NuxtLink
+      to="/auth/login"
+      class="
+        text-decoration-none
+        ma-10
+        d-flex
+        align-center
+        d-flex
+        justify-center
+      "
+      style="color: white"
+    >
+      Vous avez déjà un compte ? Connectez-vous
+    </NuxtLink>
   </div>
 </template>    
 

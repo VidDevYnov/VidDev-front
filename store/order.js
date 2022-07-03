@@ -49,38 +49,31 @@ export const actions = {
     async sendMailBuyeur({ commit }, { order, user, article }) {
         try {
 
-            const test = await axios.put(`${process.env.path}/emailBuyeur`, {
+            await axios.put(`${process.env.path}/emailBuyeur`, {
 
                 article,
                 order,
                 user
 
             }, config())
-            console.log(test)
-
 
         } catch (error) {
+            commit('notification/create', { description: "Problème lors de l'envoie du mail", type: 'error' }, { root: true })
         }
     },
 
     async sendMailSeller({ commit }, { user, article, buyeur }) {
         try {
-            console.log(user)
-            console.log(article)
-            console.log(buyeur)
 
-            const test = await axios.put(`${process.env.path}/emailSeller`, {
-
+            await axios.put(`${process.env.path}/emailSeller`, {
                 article,
                 buyeur,
                 user
 
             }, config())
 
-
-            console.log(test)
         } catch (error) {
-            console.log(error)
+            commit('notification/create', { description: "Problème lors de l'envoie du mail", type: 'error' }, { root: true })
         }
 
     }

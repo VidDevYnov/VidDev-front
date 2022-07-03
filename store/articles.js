@@ -39,13 +39,11 @@ export const actions = {
                 articles: { ...articles.data },
             })
 
-            console.log(articles)
         } catch (error) {
         }
     },
     async setArticles({ commit }) {
         try {
-            console.log(process.env.path)
             const articles = await axios.get(`${process.env.path}/api/articles?exists[orderArticle]=false`)
             commit('set', {
                 stateName: 'articles',

@@ -31,8 +31,8 @@
                 <v-list-item-title class="text-h5 mb-1"> </v-list-item-title>
                 <v-list-item-subtitle>
                   <v-radio-group
-                    v-model="address"
                     v-if="addresses.length > 0"
+                    v-model="address"
                     :rules="[(v) => !!v || 'L\'adresse est obligatoire']"
                   >
                     <v-radio

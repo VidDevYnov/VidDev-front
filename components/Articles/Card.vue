@@ -12,7 +12,7 @@
               <v-img
                 class="elevation-6"
                 alt=""
-                :src="`process.env.path/images/users/${$props.user.imageFilePath}`"
+                :src="`${path}/images/users/${$props.user.imageFilePath}`"
               ></v-img>
             </v-list-item-avatar>
             <v-list-item-content>
@@ -63,9 +63,9 @@ export default {
     price() {
       return displayPrice(this.$props.article.price)
     },
-    path(){
+    path() {
       return process.env.path
-    }
+    },
   },
 }
 </script>

@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { config } from '../services/tokenHelper'
 
-
 export const state = () => ({
     profil: [],
 })
@@ -41,23 +40,23 @@ export const actions = {
                 config()
             )
             commit('set', { stateName: 'profil', user: { ...profil.data } })
-
+            return profil.data
         } catch (error) {
-            console.log(error)
-
             commit('notification/create', { description: 'Problème lors de la récupération de votre profil', type: 'error' }, { root: true })
         }
     },
 
-    async modifyProfil({ commit }, { user, idUser }) {
+    async modifyProfil({ commit, path }, { user, idUser }) {
         try {
-            console.log(user)
             await axios.put(`${process.env.path}/api/users/${idUser}`,
                 user,
                 config()
             )
+            if (window.$nuxt._route.path === "/user/modify" ||window.$nuxt._route.path === "/user/account") {
+                commit('notification/create', { description: 'Profil mis à jour' }, { root: true })
+            }
         } catch (error) {
-            console.log(error)
+            commit('notification/create', { description: 'Problème lors de la mise à jour du profil', type: 'error' }, { root: true })
         }
     },
 
