@@ -213,6 +213,7 @@ export default {
           remise: tryConvertStringToNumber(this.remise),
         })
         this.sendMailSeller()
+        this.createNotificationSeller()
         this.$router.push('/')
       } else {
         this.$store.commit('notification/create', {
@@ -231,6 +232,26 @@ export default {
           firstName: this.$props.profil.firstName,
           lastName: this.$props.profil.lastName,
           addresse: `${this.address.address} ${this.address.city} ${this.address.postalCode} ${this.address.country}`,
+        },
+      })
+    },
+
+    async createNotificationSeller() {
+      await this.$store.dispatch('userNotification/createNotification', {
+        notification: {
+          user: `api/users/${this.$props.article.user.id}`,
+          isView: false,
+          title: `Vous avez vendu un article`,
+          description: `Bonjour,
+                        <br>
+                        L'utilisateur ${this.$props.profil.firstName}  ${this.$props.profil.lastName} vient de commander votre article :
+                        <br>
+                        ${this.$props.article.name}
+                        <br>
+                        Veillez le livrer a l'adresse suivante : 
+                        <br>
+                        ${this.address.address} ${this.address.city} ${this.address.postalCode} ${this.address.country}
+                        `,
         },
       })
     },

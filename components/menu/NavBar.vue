@@ -7,6 +7,40 @@
         </NuxtLink>
       </v-col>
       <v-col cols="8" sm="9" md="10" lg="11" class="d-flex justify-end pa-0">
+        <div class="d-flex flex-column justify-center ma-2">
+          <v-menu
+            v-if="$cookiz.get('role') === 'ROLE_USER'"
+            v-model="menu"
+            :close-on-content-click="false"
+            :nudge-width="200"
+            offset-x
+          >
+            <template #activator="{ on, attrs }">
+              <v-badge color="blue" :content="nbrNoView">
+                <v-icon v-bind="attrs" v-on="on">mdi-bell-outline</v-icon>
+              </v-badge>
+            </template>
+
+            <v-card max-width="500">
+              <v-list>
+                <v-list-item
+                  v-for="notification in notifications"
+                  :key="notification.id"
+                >
+                  <v-list-item-content @click="changeIsView(notification.id)">
+                    <v-list-item-title>{{
+                      notification.title
+                    }}</v-list-item-title>
+                    <v-list-item-subtitle v-html="notification.description">
+                    </v-list-item-subtitle>
+                  </v-list-item-content>
+                </v-list-item>
+              </v-list>
+
+              <v-divider></v-divider>
+            </v-card>
+          </v-menu>
+        </div>
         <div class="d-flex flex-column justify-center">
           <v-app-bar-nav-icon
             @click="isActive = !isActive"
@@ -45,6 +79,7 @@ export default {
   data() {
     return {
       isActive: false,
+      menu: false,
     }
   },
   computed: {
@@ -54,7 +89,7 @@ export default {
           {
             name: 'Tous les articles',
             path: '/articles/list',
-          },  
+          },
           {
             name: 'Profil',
             path: '/user/profil',
@@ -102,6 +137,38 @@ export default {
           path: '/auth/register',
         },
       ]
+    },
+
+    notifications() {
+      return this.$store.state.user.profil.notifications
+    },
+
+    nbrNoView() {
+      if (this.notifications) {
+        let isNoView = 0
+        this.notifications.forEach((notification) => {
+          if (!notification.isView) {
+            isNoView += 1
+          }
+        })
+        return isNoView
+      }
+      return 0
+    },
+  },
+
+  created() {
+    if (this.$cookiz.get('role') === 'ROLE_USER') {
+      this.getProfil()
+    }
+  },
+  methods: {
+    async getProfil() {
+      await this.$store.dispatch('user/setProfil')
+    },
+
+    async changeIsView(id) {
+      await this.$store.dispatch('userNotification/changeIsView', id)
     },
   },
 }

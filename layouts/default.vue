@@ -16,3 +16,18 @@
     </client-only>
   </v-app>
 </template>
+
+
+<script>
+export default {
+  created() {
+    this.refreshToken()
+  },
+
+  methods: {
+    async refreshToken() {
+      await this.$store.dispatch('login/refreshToken')
+    },
+  },
+}
+</script>

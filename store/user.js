@@ -52,7 +52,7 @@ export const actions = {
                 user,
                 config()
             )
-            if (window.$nuxt._route.path === "/user/modify" ||window.$nuxt._route.path === "/user/account") {
+            if (window.$nuxt._route.path === "/user/modify" || window.$nuxt._route.path === "/user/account") {
                 commit('notification/create', { description: 'Profil mis à jour' }, { root: true })
             }
         } catch (error) {
