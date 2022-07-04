@@ -31,6 +31,15 @@ export const actions = {
 
             dispatch('user/modifyProfil', { idUser: article.user.id, user: setUserArticle }, { root: true })
 
+            const notification = {
+                user: `api/users/${user.id}`,
+                isView: false,
+                title: `Une commande passée`,
+                description: `Vous avez acheté l'article suivant : ${article.name}`,
+            }
+
+
+            dispatch('userNotification/createNotification', { notification }, { root: true })
 
             dispatch('sendMailBuyeur', { order, user, article })
 

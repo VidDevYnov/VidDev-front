@@ -19,7 +19,7 @@ export const actions = {
 
 
             const profil = await dispatch('user/setProfil', {}, { root: true })
-
+        
             window.$nuxt.$cookiz.set('role', profil.roles[0], {
                 path: '/',
             })
@@ -34,16 +34,17 @@ export const actions = {
 
         } catch (error) {
             commit('notification/create', { description: 'Problème lors de la connection', type: 'error' }, { root: true })
-
+            console.log(error)
         }
     },
 
 
     async refreshToken({ dispatch }) {
         try {
+
             const res = await axios.post(
                 `${process.env.path}/api/token/refresh`,
-                { "refresh_token": localStorage.getItem('refresh_token') },
+                { "refresh_token": window.$nuxt.$cookiz.get('refresh_token') },
                 { 'Content-Type': 'application/json' }
             )
 
@@ -57,6 +58,7 @@ export const actions = {
 
             dispatch('user/setProfil', {}, { root: true })
 
+            console.log(res)
 
         } catch (error) {
         }
