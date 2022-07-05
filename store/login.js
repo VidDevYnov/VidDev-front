@@ -19,13 +19,13 @@ export const actions = {
 
 
             const profil = await dispatch('user/setProfil', {}, { root: true })
-        
+
             window.$nuxt.$cookiz.set('role', profil.roles[0], {
                 path: '/',
             })
 
             if (profil.roles[0] === "ROLE_ADMIN") {
-                this.$router.push('/admin/dashboard')
+                this.$router.push('/admin/filter')
             } else {
                 this.$router.push('/user/profil')
             }
@@ -34,7 +34,6 @@ export const actions = {
 
         } catch (error) {
             commit('notification/create', { description: 'Problème lors de la connection', type: 'error' }, { root: true })
-            console.log(error)
         }
     },
 
@@ -57,8 +56,6 @@ export const actions = {
             })
 
             dispatch('user/setProfil', {}, { root: true })
-
-            console.log(res)
 
         } catch (error) {
         }

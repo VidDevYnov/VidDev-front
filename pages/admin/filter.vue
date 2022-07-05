@@ -1,8 +1,10 @@
 <template>
   <div class="ma-5">
     <Title name="Gestion des filtres"></Title>
-    <v-row
-    >
+    <p class="text-center red--text text--lighten-1">
+      Attention, vous ne pourrez pas supprimer des filtres liées à des articles
+    </p>
+    <v-row>
       <v-col cols="6">
         <FilterModify
           name="article_categories"

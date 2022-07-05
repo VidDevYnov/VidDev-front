@@ -49,6 +49,7 @@ export default {
     member: {
       type: Object,
       required: true,
+      default: () => {},
     },
   },
   computed: {

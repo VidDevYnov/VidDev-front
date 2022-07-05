@@ -18,14 +18,21 @@ export default {
       return {}
     },
   },
-  created() {
-    this.getArticle()
+  async created() {
+    await this.getArticle()
+    this.checkCanChange()
   },
   methods: {
     async getArticle() {
       await this.$store.dispatch('articles/setArticle', {
         idArticle: this.$route.params.id,
       })
+    },
+
+    checkCanChange() {
+      if (this.article.user.id !== this.$store.state.user.profil.id) {
+        this.$router.push('/')
+      }
     },
   },
 }

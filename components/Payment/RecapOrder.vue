@@ -76,22 +76,23 @@
                 <v-list-item-subtitle
                   >Point à gagner: {{ Point }}
                 </v-list-item-subtitle>
-                <div v-if="!isActive" class="my-4">
-                  Ajouter une remise grace à vos points
-                  <v-icon
-                    class="mr-4"
-                    :class="{ active: isActive }"
-                    @click="isActive = !isActive"
+                <div
+                  v-if="!isActive"
+                  class="my-4"
+                  @click="isActive = !isActive"
+                >
+                  Ajouter une remise grâce à vos points
+                  <v-icon style="font-size: 20px mx-2"
+                    >mdi-heart-multiple</v-icon
+                  >
+
+                  <v-icon class="mr-4" :class="{ active: isActive }"
                     >mdi-plus-circle-outline
                   </v-icon>
                 </div>
-                <div v-else class="my-4">
+                <div v-else class="my-4" @click="isActive = !isActive">
                   Ne pas mettre de remise
-                  <v-icon
-                    class="mr-4"
-                    :class="{ active: isActive }"
-                    @click="isActive = !isActive"
-                  >
+                  <v-icon class="mr-4" :class="{ active: isActive }">
                     mdi-minus-circle-outline
                   </v-icon>
                 </div>
@@ -115,7 +116,7 @@
                 <div class="text-overline mb-4">Total {{ Totalprice }} €</div>
               </v-list-item-content>
             </v-list-item>
-            <v-row class="justify-center ma-2">
+            <v-row v-if="canBuy" class="justify-center ma-2">
               <v-btn
                 outlined
                 width="220"
@@ -124,6 +125,9 @@
               >
                 Payer maintenant</v-btn
               >
+            </v-row>
+            <v-row v-else class="justify-center ma-2">
+              <p>Vous ne pouvez pas acheter votre propre article</p>
             </v-row>
           </v-card>
         </div>
@@ -194,6 +198,12 @@ export default {
 
     path() {
       return process.env.path
+    },
+    canBuy() {
+      const hasData = this.$props.article.user && this.$props.profil
+      return hasData
+        ? this.$props.article.user.id !== this.$props.profil.id
+        : false
     },
   },
 
