@@ -81,7 +81,7 @@ export const actions = {
             )
             commit('notification/create', { description: 'L\'adresse à bien été supprimé' }, { root: true })
         } catch (error) {
-            commit('notification/create', { description: 'Problème lors de la suppression de l\'address', type: 'error' }, { root: true })
+            commit('notification/create', { description: 'Problème lors de la suppression de l\'adresse', type: 'error' }, { root: true })
         }
     },
 

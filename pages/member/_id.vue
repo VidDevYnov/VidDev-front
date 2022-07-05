@@ -13,14 +13,10 @@ export default {
   computed: {
     member() {
       const member = this.$store.state.member.member
-      if (member.length !== 0) {
-        if (member.addresses.length > 0) {
-          member.address =
-            member.addresses[0].city + ', ' + member.addresses[0].country
-        }
-        return member
+      if (member?.addresses?.length > 0) {
+        member.address = `${member.addresses[0].city}, ${member.addresses[0].country}`
       }
-      return {}
+      return member.length === 0 ? {} : member
     },
     articles() {
       const articles = this.$store.state.articles.userArticles

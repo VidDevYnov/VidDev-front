@@ -23,9 +23,10 @@ export default {
       return {}
     },
   },
-  created() {
-    this.getArticle()
-    this.getProfil()
+  async created() {
+    await this.getArticle()
+    await this.getProfil()
+    this.checkCanChange()
   },
   methods: {
     async getArticle() {
@@ -35,6 +36,12 @@ export default {
     },
     async getProfil() {
       await this.$store.dispatch('user/setProfil')
+    },
+
+    checkCanChange() {
+      if (this.article.orderArticle) {
+        this.$router.push('/')
+      }
     },
   },
 }

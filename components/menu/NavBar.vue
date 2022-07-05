@@ -16,24 +16,32 @@
             offset-x
           >
             <template #activator="{ on, attrs }">
-              <v-badge color="blue" :content="nbrNoView">
+              <v-badge v-if="nbrNoView !== 0" color="blue" :content="nbrNoView">
                 <v-icon v-bind="attrs" v-on="on">mdi-bell-outline</v-icon>
               </v-badge>
+              <v-icon v-else v-bind="attrs" v-on="on">mdi-bell-outline</v-icon>
             </template>
 
-            <v-card max-width="500">
+            <v-card max-width="500" style="overflow: auto; height-max: 400px">
               <v-list>
                 <v-list-item
                   v-for="notification in notifications"
                   :key="notification.id"
                 >
-                  <v-list-item-content @click="changeIsView(notification.id)">
-                    <v-list-item-title>{{
-                      notification.title
-                    }}</v-list-item-title>
-                    <v-list-item-subtitle v-html="notification.description">
-                    </v-list-item-subtitle>
-                  </v-list-item-content>
+                  <v-hover>
+                    <template v-slot:default="{ hover }">
+                      <v-list-item-content
+                        @click="changeIsView(notification.id)"
+                        :class="`elevation-${hover ? 24 : 0} pa-5`"
+                      >
+                        <v-list-item-title>{{
+                          notification.title
+                        }}</v-list-item-title>
+                        <v-list-item-subtitle v-html="notification.description">
+                        </v-list-item-subtitle>
+                      </v-list-item-content>
+                    </template>
+                  </v-hover>
                 </v-list-item>
               </v-list>
 
@@ -110,10 +118,6 @@ export default {
       } else if (this.$cookiz.get('role') === 'ROLE_ADMIN') {
         return [
           {
-            name: 'Tableau de bord',
-            path: '/admin/dashboard',
-          },
-          {
             name: 'Gestion des filtres',
             path: '/admin/filter',
           },
@@ -144,16 +148,11 @@ export default {
     },
 
     nbrNoView() {
-      if (this.notifications) {
-        let isNoView = 0
-        this.notifications.forEach((notification) => {
-          if (!notification.isView) {
-            isNoView += 1
-          }
-        })
-        return isNoView
-      }
-      return 0
+      const isNoView = this.notifications?.reduce(
+        (sum, notification) => (!notification.isView ? sum + 1 : sum),
+        0
+      )
+      return isNoView ?? 0
     },
   },
 

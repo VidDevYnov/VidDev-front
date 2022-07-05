@@ -1,10 +1,5 @@
 <template>
   <div>
-    <v-row class="justify-space-around ma-5">
-      <div v-for="item in items" :key="item.title">
-        <MenuDropDown :items="item" /></div
-    ></v-row>
-
     <div>
       <v-img height="400" src="image/share.jpg"></v-img>
     </div>
@@ -22,39 +17,6 @@
 
 <script>
 export default {
-  data() {
-    return {
-      items: [
-        {
-          title: 'Femmes',
-          articles: [
-            { title: 'Vêtements', to: '' },
-            { title: 'Chaussures', to: '' },
-            { title: 'Sacs', to: '' },
-            { title: 'Tous', to: '' },
-          ],
-        },
-        {
-          title: 'Hommes',
-          articles: [
-            { title: 'Vêtements', to: '' },
-            { title: 'Chaussures', to: '' },
-            { title: 'Sacs', to: '' },
-            { title: 'Tous', to: '' },
-          ],
-        },
-        {
-          title: 'Enfants',
-          articles: [
-            { title: 'Vêtements', to: '' },
-            { title: 'Chaussures', to: '' },
-            { title: 'Sacs', to: '' },
-            { title: 'Tous', to: '' },
-          ],
-        },
-      ],
-    }
-  },
   created() {
     this.getArticles()
   },
