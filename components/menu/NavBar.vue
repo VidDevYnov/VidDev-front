@@ -133,11 +133,11 @@ export default {
           path: '/articles/list',
         },
         {
-          name: 'Connection',
+          name: 'Connexion',
           path: '/auth/login',
         },
         {
-          name: 'Inscritpion',
+          name: 'Inscription',
           path: '/auth/register',
         },
       ]

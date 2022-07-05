@@ -1,7 +1,7 @@
 <template>
   <v-form v-model="isFormValid">
-    <v-row>
-      <v-col cols="8">
+    <v-row class="ma-0">
+      <v-col cols="12" md="8" class="ma-0 pa-0">
         <div class="ma-5">
           <v-card class="mx-auto ma-5" outlined>
             <v-list-item three-line>
@@ -60,7 +60,7 @@
           </v-card>
         </div>
       </v-col>
-      <v-col cols="4">
+      <v-col cols="12" md="4" class="ma-0 pa-0">
         <div class="ma-5">
           <v-card class="mx-auto ma-5 pa-2">
             <v-list-item>
