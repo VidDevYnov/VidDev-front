@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-col col="12" sm="12" md="12" lg="12" class="d-flex justify-center">
-      <v-card class="ma-5 pa-5" color="light" light>
+      <v-card class="ma-1 pa-2" color="light" light>
         <v-row>
           <v-col col="12" sm="12" md="12" lg="12" class="d-flex justify-center">
             <div class="ma-1">

@@ -15,7 +15,6 @@
     <p class="ml-2">Couleur: {{ $props.article.color }}</p>
 
     <div class="d-flex flex-column align-center">
-      <v-btn outlined width="220" class="ma-2"> FAVORIS</v-btn>
       <NuxtLink
         :to="`/user/ordered/${$props.article.id}`"
         class="text-decoration-none"

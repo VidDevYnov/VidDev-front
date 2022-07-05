@@ -1,5 +1,5 @@
 <template>
-  <v-col cols="6"
+  <v-col cols="12" md="6" 
     ><v-card class="pa-5">
       <v-form v-model="isFormValid">
         <v-text-field

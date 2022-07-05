@@ -17,14 +17,14 @@
       </v-row>
 
       <v-row>
-        <v-col>
+        <v-col cols="12" md="6">
           <v-text-field
             :rules="[(v) => !!v || 'La nom est obligatoire']"
             label="Nom figurant sur la carte"
             outlined
           ></v-text-field>
         </v-col>
-        <v-col>
+        <v-col cols="12" md="6">
           <v-text-field
             v-model="CardNumber"
             :counter="16"
@@ -40,13 +40,13 @@
         </v-col>
       </v-row>
       <v-row>
-        <v-col>
+        <v-col cols="12" sm="6" md="3">
           <v-select :items="MonthList" label="Mois" outlined hide-details />
         </v-col>
-        <v-col>
+        <v-col cols="12" sm="6" md="3">
           <v-select :items="YearList" label="Année" outlined hide-details />
         </v-col>
-        <v-col>
+        <v-col cols="12" sm="6" md="3">
           <v-text-field
             v-model="cvv"
             single-line
