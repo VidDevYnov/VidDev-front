@@ -180,7 +180,7 @@ export default {
     },
 
     path() {
-      return process.env.path
+      return process.env.NUXT_ENV_PATH
     },
   },
   created() {

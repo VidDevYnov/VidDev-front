@@ -49,7 +49,7 @@ export default {
       return {}
     },
     path() {
-      return process.env.path
+      return process.env.NUXT_ENV_PATH
     },
   },
   created() {

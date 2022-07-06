@@ -22,7 +22,7 @@ export const mutations = {
 export const actions = {
     async createUser({ commit }, { user }) {
         try {
-            await axios.post(`${process.env.path}/api/users`, {
+            await axios.post(`${process.env.NUXT_ENV_PATH}/api/users`, {
                 ...user
             })
             commit('notification/create', { description: 'Vous êtes inscrit' }, { root: true })
@@ -36,7 +36,7 @@ export const actions = {
     async setProfil({ commit }) {
         try {
 
-            const profil = await axios.get(`${process.env.path}/api/profil`,
+            const profil = await axios.get(`${process.env.NUXT_ENV_PATH}/api/profil`,
                 config()
             )
             commit('set', { stateName: 'profil', user: { ...profil.data } })
@@ -46,9 +46,9 @@ export const actions = {
         }
     },
 
-    async modifyProfil({ commit, path }, { user, idUser }) {
+    async modifyProfil({ commit }, { user, idUser }) {
         try {
-            await axios.put(`${process.env.path}/api/users/${idUser}`,
+            await axios.put(`${process.env.NUXT_ENV_PATH}/api/users/${idUser}`,
                 user,
                 config()
             )
@@ -63,7 +63,7 @@ export const actions = {
 
     async modifyAddress({ commit }, { address, idAddress }) {
         try {
-            await axios.put(`${process.env.path}/api/addresses/${idAddress}`,
+            await axios.put(`${process.env.NUXT_ENV_PATH}/api/addresses/${idAddress}`,
                 address,
                 config()
             )
@@ -76,7 +76,7 @@ export const actions = {
 
     async deleteAddress({ commit }, { idAddress }) {
         try {
-            await axios.delete(`${process.env.path}/api/addresses/${idAddress}`,
+            await axios.delete(`${process.env.NUXT_ENV_PATH}/api/addresses/${idAddress}`,
                 config()
             )
             commit('notification/create', { description: 'L\'adresse à bien été supprimé' }, { root: true })
@@ -88,7 +88,7 @@ export const actions = {
 
     async addAddress({ commit }, { user, address }) {
         try {
-            await axios.post(`${process.env.path}/api/addresses`,
+            await axios.post(`${process.env.NUXT_ENV_PATH}/api/addresses`,
                 { ...address, user },
                 config()
             )
@@ -101,7 +101,7 @@ export const actions = {
 
     async addProfilImage({ commit }, { idUser, formData }) {
         try {
-            await axios.post(`${process.env.path}/api/imageUser/${idUser}`, formData, config()
+            await axios.post(`${process.env.NUXT_ENV_PATH}/api/imageUser/${idUser}`, formData, config()
             )
             commit('notification/create', { description: 'L\'image à bien été ajouté' }, { root: true })
 

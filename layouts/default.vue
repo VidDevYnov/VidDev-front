@@ -21,7 +21,7 @@
 <script>
 export default {
   created() {
-    this.refreshToken()
+    if (this.$cookiz.get('role')) this.refreshToken()
   },
 
   methods: {

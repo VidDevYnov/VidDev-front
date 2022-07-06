@@ -33,7 +33,7 @@ export const mutations = {
 export const actions = {
     async setUserArticles({ commit }, idUser) {
         try {
-            const articles = await axios.get(`${process.env.path}/api/articles?exists[orderArticle]=false&user=${idUser}`)
+            const articles = await axios.get(`${process.env.NUXT_ENV_PATH}/api/articles?exists[orderArticle]=false&user=${idUser}`)
             commit('set', {
                 stateName: 'userArticles',
                 articles: { ...articles.data },
@@ -44,7 +44,7 @@ export const actions = {
     },
     async setArticles({ commit }) {
         try {
-            const articles = await axios.get(`${process.env.path}/api/articles?exists[orderArticle]=false`)
+            const articles = await axios.get(`${process.env.NUXT_ENV_PATH}/api/articles?exists[orderArticle]=false`)
             commit('set', {
                 stateName: 'articles',
                 articles: { ...articles.data },
@@ -57,7 +57,7 @@ export const actions = {
         try {
 
             const article = await axios.get(
-                `${process.env.path}/api/articles/${idArticle}`
+                `${process.env.NUXT_ENV_PATH}/api/articles/${idArticle}`
             )
             commit('set', { stateName: 'article', articles: { ...article.data } })
         } catch (error) {
@@ -67,7 +67,7 @@ export const actions = {
     async setArticlesFilter({ commit }, { url }) {
         try {
             const articles = await axios.get(
-                `${process.env.path}${url}`, {
+                `${process.env.NUXT_ENV_PATH}${url}`, {
                 headers: {
                     'content-type': 'application/json',
                     'Accept': 'application/ld+json'
@@ -83,11 +83,11 @@ export const actions = {
     async getArticlesFilter({ commit }) {
         try {
             const [categorie, taille, type, matière, etat] = await Promise.all([
-                axios.get(`${process.env.path}/api/article_categories`),
-                axios.get(`${process.env.path}/api/article_sizes`),
-                axios.get(`${process.env.path}/api/article_types`),
-                axios.get(`${process.env.path}/api/article_materials`),
-                axios.get(`${process.env.path}/api/article_states`),
+                axios.get(`${process.env.NUXT_ENV_PATH}/api/article_categories`),
+                axios.get(`${process.env.NUXT_ENV_PATH}/api/article_sizes`),
+                axios.get(`${process.env.NUXT_ENV_PATH}/api/article_types`),
+                axios.get(`${process.env.NUXT_ENV_PATH}/api/article_materials`),
+                axios.get(`${process.env.NUXT_ENV_PATH}/api/article_states`),
             ])
 
             commit('set', {
@@ -123,7 +123,7 @@ export const actions = {
 
             article.user = `api/users/${idUser}`
 
-            const newArticle = await axios.post(`${process.env.path}/api/articles`, {
+            const newArticle = await axios.post(`${process.env.NUXT_ENV_PATH}/api/articles`, {
                 ...article
             },
                 config()
@@ -138,7 +138,7 @@ export const actions = {
 
     async createArticleImage({ commit }, { idArticle, formData }) {
         try {
-            await axios.post(`${process.env.path}/api/imageArticle/${idArticle}`, formData, config())
+            await axios.post(`${process.env.NUXT_ENV_PATH}/api/imageArticle/${idArticle}`, formData, config())
             commit('notification/create', { description: 'Les modification on été réaliser avec succèes' }, { root: true })
 
         } catch (error) {
@@ -162,7 +162,7 @@ export const actions = {
                 "articleCategory": `api/article_categories/${article.articleCategory.id}`,
             }
 
-            await axios.put(`${process.env.path}/api/articles/${articleId}`, article, config())
+            await axios.put(`${process.env.NUXT_ENV_PATH}/api/articles/${articleId}`, article, config())
             commit('notification/create', { description: 'Votre article à bien été mis à jours' }, { root: true })
 
         } catch (error) {
@@ -173,7 +173,7 @@ export const actions = {
 
     async deleteArticle({ commit }, { idArticle }) {
         try {
-            await axios.delete(`${process.env.path}/api/articles/${idArticle}`, config())
+            await axios.delete(`${process.env.NUXT_ENV_PATH}/api/articles/${idArticle}`, config())
             commit('notification/create', { description: 'Vous avez supprimé un article' }, { root: true })
 
         } catch (error) {

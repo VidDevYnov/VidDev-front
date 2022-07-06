@@ -23,7 +23,7 @@ export const mutations = {
 export const actions = {
     async setFilter({ commit }, filterName) {
         try {
-            const filter = await axios.get(`${process.env.path}/api/${filterName}`)
+            const filter = await axios.get(`${process.env.NUXT_ENV_PATH}/api/${filterName}`)
             commit('set', {
                 stateName: filterName,
                 filter: { ...filter.data },
@@ -34,7 +34,7 @@ export const actions = {
 
     async createFilter({ commit }, { filter }) {
         try {
-            await axios.post(`${process.env.path}/api/${filter.name}`, {
+            await axios.post(`${process.env.NUXT_ENV_PATH}/api/${filter.name}`, {
                 worded: filter.worded,
 
             },
@@ -49,7 +49,7 @@ export const actions = {
 
     async modifyFilter({ commit }, { filter }) {
         try {
-            await axios.put(`${process.env.path}/api/${filter.name}/${filter.id}`, { worded: filter.worded }, config())
+            await axios.put(`${process.env.NUXT_ENV_PATH}/api/${filter.name}/${filter.id}`, { worded: filter.worded }, config())
             commit('notification/create', { description: 'Le filtre à bien été mis à jour' }, { root: true })
 
         } catch (error) {
@@ -60,7 +60,7 @@ export const actions = {
 
     async deleteFilter({ commit }, { filter }) {
         try {
-            await axios.delete(`${process.env.path}/api/${filter.name}/${filter.id}`, config())
+            await axios.delete(`${process.env.NUXT_ENV_PATH}/api/${filter.name}/${filter.id}`, config())
             commit('notification/create', { description: 'Le filtre à été supprimé' }, { root: true })
 
         } catch (error) {

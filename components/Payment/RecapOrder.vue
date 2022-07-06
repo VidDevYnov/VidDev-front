@@ -197,7 +197,7 @@ export default {
     },
 
     path() {
-      return process.env.path
+      return process.env.NUXT_ENV_PATH
     },
     canBuy() {
       const hasData = this.$props.article.user && this.$props.profil

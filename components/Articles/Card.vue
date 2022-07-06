@@ -64,7 +64,7 @@ export default {
       return displayPrice(this.$props.article.price)
     },
     path() {
-      return process.env.path
+      return process.env.NUXT_ENV_PATH
     },
   },
 }
