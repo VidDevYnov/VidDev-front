@@ -1,7 +1,6 @@
 import axios from 'axios'
 import { tryConvertStringToNumber } from '../services/numberHelper'
 import { config } from '../services/tokenHelper'
-axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
 
 export const state = () => ({
     userArticles: [],
@@ -33,7 +32,13 @@ export const mutations = {
 export const actions = {
     async setUserArticles({ commit }, idUser) {
         try {
-            const articles = await axios.get(`${process.env.NUXT_ENV_PATH}/api/articles?exists[orderArticle]=false&user=${idUser}`)
+            const articles = await axios.get(`${process.env.NUXT_ENV_PATH}/api/articles?exists[orderArticle]=false&user=${idUser}`,
+                {
+                    headers: {
+                        'Access-Control-Allow-Origin': '*',
+                    }
+
+                })
             commit('set', {
                 stateName: 'userArticles',
                 articles: { ...articles.data },
