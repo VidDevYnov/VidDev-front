@@ -1,5 +1,11 @@
 <template>
-  <v-img class="ma-1" :src="$props.path" max-height="450px" max-width="350px"></v-img>
+  <v-img
+    class="ma-1"
+    :src="$props.path"
+    :lazy-src="defaultImage"
+    max-height="450px"
+    max-width="350px"
+  ></v-img>
 </template>
 
 <script>
@@ -8,6 +14,12 @@ export default {
     path: {
       type: String,
       required: true,
+    },
+  },
+
+  computed: {
+    defaultImage() {
+      return process.env.NUXT_ENV_IMAGE
     },
   },
 }

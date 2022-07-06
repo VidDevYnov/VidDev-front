@@ -13,6 +13,7 @@
                 class="elevation-6"
                 alt=""
                 :src="`${path}/images/users/${$props.user.imageFilePath}`"
+                :lazy-src="defaultImage"
               ></v-img>
             </v-list-item-avatar>
             <v-list-item-content>
@@ -32,6 +33,7 @@
           height="200"
           width="250"
           :src="`${path}/images/articles/${$props.article.imageFilePath}`"
+          :lazy-src="defaultImage"
         ></v-img>
       </NuxtLink>
 
@@ -65,6 +67,9 @@ export default {
     },
     path() {
       return process.env.NUXT_ENV_PATH
+    },
+    defaultImage() {
+      return process.env.NUXT_ENV_IMAGE
     },
   },
 }

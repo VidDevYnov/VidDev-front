@@ -25,7 +25,6 @@ export default {
   },
   async created() {
     await this.getArticle()
-    await this.getProfil()
     this.checkCanChange()
   },
   methods: {
@@ -33,9 +32,6 @@ export default {
       await this.$store.dispatch('articles/setArticle', {
         idArticle: this.$route.params.id,
       })
-    },
-    async getProfil() {
-      await this.$store.dispatch('user/setProfil')
     },
 
     checkCanChange() {

@@ -9,6 +9,7 @@
       <v-img
         height="250px"
         :src="`${path}/images/articles/${article.imageFilePath}`"
+        :lazy-src="defaultImage"
       ></v-img>
     </v-card>
   </NuxtLink>
@@ -26,6 +27,9 @@ export default {
   computed: {
     path() {
       return process.env.NUXT_ENV_PATH
+    },
+    defaultImage() {
+      return process.env.NUXT_ENV_IMAGE
     },
   },
 }

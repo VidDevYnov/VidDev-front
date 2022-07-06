@@ -105,6 +105,7 @@
                   `${path}/images/articles/${$props.article.imageFilePath}` ||
                   '../image/avatar.png'
                 "
+                :lazy-src="defaultImage"
               ></v-img>
             </v-row>
 
@@ -181,6 +182,10 @@ export default {
 
     path() {
       return process.env.NUXT_ENV_PATH
+    },
+
+    defaultImage() {
+      return process.env.NUXT_ENV_IMAGE
     },
   },
   created() {

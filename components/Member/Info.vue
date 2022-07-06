@@ -3,10 +3,8 @@
     <v-col class="d-flex justify-center" cols="12" sm="6" md="4">
       <v-avatar color="primary" size="200">
         <v-img
-          :src="
-            `${path}/images/users/${$props.member.imageFilePath}` ||
-            '../image/avatar.png'
-          "
+          :src="`${path}/images/users/${$props.member.imageFilePath}`"
+          :lazy-src="defaultImage"
         ></v-img>
       </v-avatar>
     </v-col>
@@ -55,6 +53,9 @@ export default {
   computed: {
     path() {
       return process.env.NUXT_ENV_PATH
+    },
+    defaultImage() {
+      return process.env.NUXT_ENV_IMAGE
     },
   },
 }

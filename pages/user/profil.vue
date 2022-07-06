@@ -38,11 +38,10 @@ export default {
     },
   },
   created() {
-    this.getProfil()
+    this.setUserArticles()
   },
   methods: {
-    async getProfil() {
-      await this.$store.dispatch('user/setProfil')
+    async setUserArticles() {
       await this.$store.dispatch('articles/setUserArticles', this.profil.id)
     },
   },

@@ -8,6 +8,7 @@
               `${path}/images/users/${$props.profil.imageFilePath}` ||
               '../image/avatar.png'
             "
+            :lazy-src="defaultImage"
           ></v-img>
         </v-avatar>
       </div>
@@ -53,6 +54,9 @@ export default {
   computed: {
     path() {
       return process.env.NUXT_ENV_PATH
+    },
+    defaultImage() {
+      return process.env.NUXT_ENV_IMAGE
     },
   },
 

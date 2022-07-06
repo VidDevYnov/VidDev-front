@@ -19,6 +19,7 @@
               <v-list-item-avatar tile size="80">
                 <v-img
                   :src="`${path}/images/articles/${$props.article.imageFilePath}`"
+                  :lazy-src="defaultImage"
                 ></v-img
               ></v-list-item-avatar>
             </v-list-item>
@@ -198,6 +199,10 @@ export default {
 
     path() {
       return process.env.NUXT_ENV_PATH
+    },
+
+    defaultImage() {
+      return process.env.NUXT_ENV_IMAGE
     },
     canBuy() {
       const hasData = this.$props.article.user && this.$props.profil
