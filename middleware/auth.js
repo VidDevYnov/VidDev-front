@@ -9,6 +9,6 @@ export default function ({ redirect, route, app }) {
         return redirect('/auth/login')
     }
     if (role === "ROLE_ADMIN" && (!route.path.startsWith('/admin') && !route.path.startsWith('/auth'))) {
-        return redirect('/admin/dashboard')
+        return redirect('/admin/filter')
     }
 }

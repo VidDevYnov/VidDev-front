@@ -4,7 +4,7 @@ export const actions = {
     async connection({ commit, dispatch }, { user }) {
         try {
             const res = await axios.post(
-                `${process.env.path}/api/login`,
+                `${process.env.NUXT_ENV_PATH}/api/login`,
                 { ...user },
                 { 'Content-Type': 'application/json' }
             )
@@ -42,7 +42,7 @@ export const actions = {
         try {
 
             const res = await axios.post(
-                `${process.env.path}/api/token/refresh`,
+                `${process.env.NUXT_ENV_PATH}/api/token/refresh`,
                 { "refresh_token": window.$nuxt.$cookiz.get('refresh_token') },
                 { 'Content-Type': 'application/json' }
             )
