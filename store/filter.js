@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { config } from '../services/tokenHelper'
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
 
 
 export const state = () => ({
