@@ -1,6 +1,6 @@
 import axios from 'axios'
-// import { tryConvertStringToNumber } from '../services/numberHelper'
 import { config } from '../services/tokenHelper'
+axios.defaults.headers.post['Access-Control-Allow-Origin'] = '*'
 
 export const actions = {
 
