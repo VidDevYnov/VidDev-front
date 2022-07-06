@@ -16,13 +16,12 @@
             offset-x
           >
             <template #activator="{ on, attrs }">
-              <v-badge v-if="nbrNoView !== 0" color="blue" :content="nbrNoView">
+              <v-badge color="blue" :content="nbrNoView">
                 <v-icon v-bind="attrs" v-on="on">mdi-bell-outline</v-icon>
               </v-badge>
-              <v-icon v-else v-bind="attrs" v-on="on">mdi-bell-outline</v-icon>
             </template>
 
-            <v-card max-width="500" style="overflow: auto; height-max: 400px">
+            <v-card max-width="500" style="overflow: auto; height: 400px">
               <v-list>
                 <v-list-item
                   v-for="notification in notifications"

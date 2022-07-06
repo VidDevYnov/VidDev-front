@@ -6,17 +6,3 @@
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  created() {
-    this.getProfil()
-  },
-
-  methods: {
-    async getProfil() {
-      await this.$store.dispatch('user/setProfil')
-    },
-  },
-}
-</script>

@@ -1,9 +1,7 @@
 <template>
-  <v-col cols="12" md="6" 
+  <v-col cols="12" md="6"
     ><v-card class="pa-5">
-      <p
-        class="red--text text--lighten-1"
-      >
+      <p class="red--text text--lighten-1">
         Attention si vous changez votre mot de passe vous allez être déconnecté
       </p>
       <v-form v-model="isFormValid">
@@ -56,8 +54,7 @@ export default {
         },
         idUser: this.$store.state.user.profil.id,
       })
-      localStorage.removeItem('refresh_token')
-      localStorage.removeItem('token')
+      this.$cookiz.removeAll()
       this.$router.push('/auth/login')
     },
   },
