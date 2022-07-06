@@ -54,7 +54,7 @@ export default {
   },
   computed: {
     path() {
-      return process.env.path
+      return process.env.NUXT_ENV_PATH
     },
   },
 }

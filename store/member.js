@@ -15,7 +15,7 @@ export const actions = {
     async setMember({ commit }, idMember) {
         try {
 
-            const member = await axios.get(`${process.env.path}/api/users/${idMember}`)
+            const member = await axios.get(`${process.env.NUXT_ENV_PATH}/api/users/${idMember}`)
             commit('set', { stateName: 'member', member: { ...member.data } })
         } catch (error) {
         }

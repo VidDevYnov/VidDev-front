@@ -7,9 +7,9 @@ export const actions = {
 
     async orderArticle({ commit, dispatch }, { order, user, article, remise }) {
         try {
-            const setorder = await axios.post(`${process.env.path}/api/orders`, order, config())
+            const setorder = await axios.post(`${process.env.NUXT_ENV_PATH}/api/orders`, order, config())
 
-            await axios.put(`${process.env.path}/api/articles/${article.id}`, { orderArticle: `api/orders/${setorder.data.id}` }, config())
+            await axios.put(`${process.env.NUXT_ENV_PATH}/api/articles/${article.id}`, { orderArticle: `api/orders/${setorder.data.id}` }, config())
 
 
             let setPoint = user.point
@@ -58,7 +58,7 @@ export const actions = {
     async sendMailBuyeur({ commit }, { order, user, article }) {
         try {
 
-            await axios.put(`${process.env.path}/emailBuyeur`, {
+            await axios.put(`${process.env.NUXT_ENV_PATH}/emailBuyeur`, {
 
                 article,
                 order,
@@ -74,7 +74,7 @@ export const actions = {
     async sendMailSeller({ commit }, { user, article, buyeur }) {
         try {
 
-            await axios.put(`${process.env.path}/emailSeller`, {
+            await axios.put(`${process.env.NUXT_ENV_PATH}/emailSeller`, {
                 article,
                 buyeur,
                 user
